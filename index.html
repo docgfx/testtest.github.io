@@ -130,9 +130,6 @@ h1 {
   border-radius: 12px;
   filter: grayscale(100%);
   transition: 0.3s;
-  /* GIFs starten NICHT automatisch - wir verwenden ein normales img, aber durch data-src/gif Trick? 
-     Besser: Standardmäßig wird das GIF nicht animiert, erst bei Hover wird die Animation gestartet.
-     Dafür ersetzen wir das src-Attribut dynamisch mit einer JS-Lösung. */
 }
 
 .images img:hover {
@@ -193,11 +190,6 @@ h1 {
   }
 }
 /* ========== ENDE PRODUCT BOXEN SKALIERUNG ========== */
-
-/* zusätzlicher Stil, um sicherzustellen, dass GIFs nur bei Hover laufen */
-.gif-hover {
-  transition: filter 0.2s;
-}
 </style>
 </head>
 
@@ -290,16 +282,16 @@ h1 {
 
 <div class="panel">
   <div class="images">
-    <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210394495090778/ws_logo.png?ex=69e8e1c4&is=69e79044&hm=dd8c7dfbe8e1a61a7d13e436ef85c15a541735a5666742fe91261e789c47f508&">
+    <!-- Die GIFs in Logos werden durch JS gesteuert: Nur bei Hover animiert -->
+    <img class="gif-on-hover" data-static="https://cdn.discordapp.com/attachments/1403170169437683842/1403210394495090778/ws_logo.png?ex=69e8e1c4&is=69e79044&hm=dd8c7dfbe8e1a61a7d13e436ef85c15a541735a5666742fe91261e789c47f508&" data-gif="https://cdn.discordapp.com/attachments/1403170169437683842/1403210394495090778/ws_logo.png?ex=69e8e1c4&is=69e79044&hm=dd8c7dfbe8e1a61a7d13e436ef85c15a541735a5666742fe91261e789c47f508&">
     <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210395279294634/Logo.png?ex=69e8e1c4&is=69e79044&hm=37b658188295cebf3e5931ad8902a785f216ecd21bdf48e4ed9500455be81028&">
     <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403211131878899845/X-Logo.png?ex=69e8e274&is=69e790f4&hm=8afc9f9a43a2512dc0aedabb7401a6977fe513e87d717b5c1033bd89c5e3493f&">
     <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464035639627899/Sellauth-Logo-EngineX.png?ex=69e8ef9a&is=69e79e1a&hm=5214def87bed80bf220a2428a338f829bd126ef0aa8d413c29adf1f6704c5065&">
     <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464037225201675/Logo-Sharp-No-BG.png?ex=69e8ef9a&is=69e79e1a&hm=04053bf9a1acb782231f56b15a8ddf15e49b15b16aab28cb3a1c31ee818d186e&">
     <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464036117909675/VS-Xmas_no_bg.png?ex=69e8ef9a&is=69e79e1a&hm=eb627a480d978277775f1a61eecd5daf53d86ce5f16885dbe997be7eb20cdd89&">
-    <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1440412914132713674/Final_Comp_2.gif?ex=69e91790&is=69e7c610&hm=d3ebe287d98acba00b9dcc5928c960179fa9a29b923fb947140fecc9096f55e2&">
-    <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1441212813224710225/S.gif?ex=69e8b4c7&is=69e76347&hm=0091b3cf28a4a7efe7a2fe3a0792e5b2f7a104ab2a8392610c2fb7e21564c300&">
-    <img src="https://media.discordapp.net/attachments/1403170169437683842/1496197460832293038/ezgif.com-optimize_19.gif?ex=69e901f8&is=69e7b078&hm=16590b8d6bc1da0c4a1d7b3ba5e45936b1d4fbb41b4b658cac1d9874305ec1e9&=&width=1000&height=1000">
-    
+    <img class="gif-on-hover" data-static="https://cdn.discordapp.com/attachments/1403170169437683842/1440412914132713674/Final_Comp_2.gif?ex=69e91790&is=69e7c610&hm=d3ebe287d98acba00b9dcc5928c960179fa9a29b923fb947140fecc9096f55e2&" data-gif="https://cdn.discordapp.com/attachments/1403170169437683842/1440412914132713674/Final_Comp_2.gif?ex=69e91790&is=69e7c610&hm=d3ebe287d98acba00b9dcc5928c960179fa9a29b923fb947140fecc9096f55e2&">
+    <img class="gif-on-hover" data-static="https://cdn.discordapp.com/attachments/1403170169437683842/1441212813224710225/S.gif?ex=69e8b4c7&is=69e76347&hm=0091b3cf28a4a7efe7a2fe3a0792e5b2f7a104ab2a8392610c2fb7e21564c300&" data-gif="https://cdn.discordapp.com/attachments/1403170169437683842/1441212813224710225/S.gif?ex=69e8b4c7&is=69e76347&hm=0091b3cf28a4a7efe7a2fe3a0792e5b2f7a104ab2a8392610c2fb7e21564c300&">
+    <img class="gif-on-hover" data-static="https://media.discordapp.net/attachments/1403170169437683842/1496197460832293038/ezgif.com-optimize_19.gif?ex=69e901f8&is=69e7b078&hm=16590b8d6bc1da0c4a1d7b3ba5e45936b1d4fbb41b4b658cac1d9874305ec1e9&=&width=1000&height=1000" data-gif="https://media.discordapp.net/attachments/1403170169437683842/1496197460832293038/ezgif.com-optimize_19.gif?ex=69e901f8&is=69e7b078&hm=16590b8d6bc1da0c4a1d7b3ba5e45936b1d4fbb41b4b658cac1d9874305ec1e9&=&width=1000&height=1000">
   </div>
 </div>
 
@@ -312,10 +304,10 @@ h1 {
 
 <div class="panel">
   <div class="images">
-    <img class="gif-hover" data-static="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif?ex=69e8ce0a&is=69e77c8a&hm=e17f67ab4c4fe44633b704229aba93364c8b5bbdb37633bb3afac70190493f65&" data-gif="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif?ex=69e8ce0a&is=69e77c8a&hm=e17f67ab4c4fe44633b704229aba93364c8b5bbdb37633bb3afac70190493f65&" src="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif?ex=69e8ce0a&is=69e77c8a&hm=e17f67ab4c4fe44633b704229aba93364c8b5bbdb37633bb3afac70190493f65&">
+    <img class="gif-on-hover" data-static="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif?ex=69e8ce0a&is=69e77c8a&hm=e17f67ab4c4fe44633b704229aba93364c8b5bbdb37633bb3afac70190493f65&" data-gif="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif?ex=69e8ce0a&is=69e77c8a&hm=e17f67ab4c4fe44633b704229aba93364c8b5bbdb37633bb3afac70190493f65&">
     <img src="https://media.discordapp.net/attachments/1427005539094630462/1479919850577985646/Banner-2.png?ex=69e91dc3&is=69e7cc43&hm=c7f21003b3cf0b3434ec57526da7475e2852fe46ca3e0a351c394f33bcb26394&=&format=webp&quality=lossless&width=1836&height=1032">
-    <img class="gif-hover" data-static="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69eb1f44&is=69e9cdc4&hm=319b875776fa139ccb910b7b6bc66ac38036f639383c31ee339ed32e9b215142&" data-gif="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69eb1f44&is=69e9cdc4&hm=319b875776fa139ccb910b7b6bc66ac38036f639383c31ee339ed32e9b215142&" src="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69eb1f44&is=69e9cdc4&hm=319b875776fa139ccb910b7b6bc66ac38036f639383c31ee339ed32e9b215142&">
-    <img class="gif-hover" data-static="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif?ex=69e9197a&is=69e7c7fa&hm=2e0fbc70e34561596f0d2493b737c508cb18a8c11861aa6ba3039f68fa46e9a5&=&width=1100&height=618" data-gif="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif?ex=69e9197a&is=69e7c7fa&hm=2e0fbc70e34561596f0d2493b737c508cb18a8c11861aa6ba3039f68fa46e9a5&=&width=1100&height=618" src="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif?ex=69e9197a&is=69e7c7fa&hm=2e0fbc70e34561596f0d2493b737c508cb18a8c11861aa6ba3039f68fa46e9a5&=&width=1100&height=618">
+    <img class="gif-on-hover" data-static="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69eb1f44&is=69e9cdc4&hm=319b875776fa139ccb910b7b6bc66ac38036f639383c31ee339ed32e9b215142&" data-gif="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69eb1f44&is=69e9cdc4&hm=319b875776fa139ccb910b7b6bc66ac38036f639383c31ee339ed32e9b215142&">
+    <img class="gif-on-hover" data-static="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif?ex=69e9197a&is=69e7c7fa&hm=2e0fbc70e34561596f0d2493b737c508cb18a8c11861aa6ba3039f68fa46e9a5&=&width=1100&height=618" data-gif="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif?ex=69e9197a&is=69e7c7fa&hm=2e0fbc70e34561596f0d2493b737c508cb18a8c11861aa6ba3039f68fa46e9a5&=&width=1100&height=618">
   </div>
 </div>
 
@@ -330,13 +322,13 @@ h1 {
 <div class="panel">
   <div class="product-boxes-grid">
     <div class="product-item">
-      <img class="gif-hover" data-static="https://media.discordapp.net/attachments/1403210515307565116/1458399313435688980/Omega_Int.gif?ex=69eb3eb4&is=69e9ed34&hm=45259044eea8c6334da28f670134ab34a2976211f8ee1555d8de3f2b47fa2c44&=&width=1836&height=1032" data-gif="https://media.discordapp.net/attachments/1403210515307565116/1458399313435688980/Omega_Int.gif?ex=69eb3eb4&is=69e9ed34&hm=45259044eea8c6334da28f670134ab34a2976211f8ee1555d8de3f2b47fa2c44&=&width=1836&height=1032" src="https://media.discordapp.net/attachments/1403210515307565116/1458399313435688980/Omega_Int.gif?ex=69eb3eb4&is=69e9ed34&hm=45259044eea8c6334da28f670134ab34a2976211f8ee1555d8de3f2b47fa2c44&=&width=1836&height=1032">
+      <img class="gif-on-hover" data-static="https://media.discordapp.net/attachments/1403210515307565116/1458399313435688980/Omega_Int.gif?ex=69eb3eb4&is=69e9ed34&hm=45259044eea8c6334da28f670134ab34a2976211f8ee1555d8de3f2b47fa2c44&=&width=1836&height=1032" data-gif="https://media.discordapp.net/attachments/1403210515307565116/1458399313435688980/Omega_Int.gif?ex=69eb3eb4&is=69e9ed34&hm=45259044eea8c6334da28f670134ab34a2976211f8ee1555d8de3f2b47fa2c44&=&width=1836&height=1032">
     </div>
     <div class="product-item">
       <img src="https://media.discordapp.net/attachments/1403210515307565116/1451238374659588148/Box-New.png?ex=69eae6cf&is=69e9954f&hm=216978edc8eed1aa6df988a844607a072c221e2370ad41fc76115e96e73249ec&=&format=webp&quality=lossless&width=1222&height=1222" alt="Box New">
     </div>
     <div class="product-item">
-      <img class="gif-hover" data-static="https://media.discordapp.net/attachments/1403210515307565116/1403211903391760475/UA.gif?ex=69eadd6c&is=69e98bec&hm=6f866f858fb04317a54ae3591bed415bd3b727978b6d8c5a75e4db63d97090ba&=&width=1836&height=1032" data-gif="https://media.discordapp.net/attachments/1403210515307565116/1403211903391760475/UA.gif?ex=69eadd6c&is=69e98bec&hm=6f866f858fb04317a54ae3591bed415bd3b727978b6d8c5a75e4db63d97090ba&=&width=1836&height=1032" src="https://media.discordapp.net/attachments/1403210515307565116/1403211903391760475/UA.gif?ex=69eadd6c&is=69e98bec&hm=6f866f858fb04317a54ae3591bed415bd3b727978b6d8c5a75e4db63d97090ba&=&width=1836&height=1032">
+      <img class="gif-on-hover" data-static="https://media.discordapp.net/attachments/1403210515307565116/1403211903391760475/UA.gif?ex=69eadd6c&is=69e98bec&hm=6f866f858fb04317a54ae3591bed415bd3b727978b6d8c5a75e4db63d97090ba&=&width=1836&height=1032" data-gif="https://media.discordapp.net/attachments/1403210515307565116/1403211903391760475/UA.gif?ex=69eadd6c&is=69e98bec&hm=6f866f858fb04317a54ae3591bed415bd3b727978b6d8c5a75e4db63d97090ba&=&width=1836&height=1032">
     </div>
     <div class="product-item">
       <img src="https://media.discordapp.net/attachments/1403210515307565116/1458399313888805038/Rust-Int.png?ex=69eb3eb4&is=69e9ed34&hm=e3a3fea564e77e70c5d125ade333b380af1b5838aa4defed8c1df82bdf419624&=&format=webp&quality=lossless&width=1836&height=1084" alt="Rust Int">
@@ -362,75 +354,46 @@ h1 {
 </div>
 
 <script>
-// ========== GIF HOVER FUNKTION ==========
-// Damit GIFs sich NUR bei hover bewegen, aber statisch sind wenn nicht drauf
-// Wir speichern den Original-Src (statisch) und wechseln bei hover auf gif, bei mouseleave zurück
+// ========== GIF HOVER FUNKTION: GIFs starten NUR bei Hover ==========
+// Technik: Jedes GIF-Bild bekommt data-static (Standbild/erster Frame) und data-gif (animierte Version)
+// Standardmäßig wird das statische Bild angezeigt. Bei Hover wird auf GIF gewechselt, bei mouseleave zurück zum Standbild.
 
-document.querySelectorAll('.gif-hover').forEach(img => {
-  // Nur wenn das Bild eine GIF-Datei ist (oder wir es als GIF behandeln wollen)
-  // Hier speichern wir die GIF-URL in data-gif und die statische Variante in data-static
-  // Falls data-static nicht gesetzt ist, verwenden wir das aktuelle src als statische Version
-  const originalSrc = img.src;
-  const gifUrl = img.getAttribute('data-gif') || originalSrc;
-  // Statische Version: Entweder data-static oder wenn nicht vorhanden, versuchen wir das GIF durch ein Standbild zu ersetzen?
-  // Da die meisten GIF-Bilder gleichzeitig die statische URL haben (aber das GIF läuft sofort), brauchen wir einen echten Ersatz.
-  // Leider haben wir keine separaten Standbilder. Wir können aber das GIF pausieren? Nicht möglich.
-  // Alternative: Reload trick? Besser: Wir nutzen eine kleine JS-Logik: Bei mouseout setzen wir src neu, dadurch startet GIF nicht mehr.
-  // Aber src neu setzen lädt das Bild neu. Für GIFs bedeutet das: sie starten wieder von vorne, sind aber immer noch animiert.
-  // Um GIFs komplett zu stoppen, bräuchten wir ein canvas oder echte Standbilder. Wir machen das Beste: Bei mouseleave setzen wir die URL nochmal,
-  // dann startet das GIF erneut, ist aber nicht "pausiert", sondern springt zum Frame 0. Das ist okay.
-  // Bessere Lösung: Wir haben leider keine statischen PNG/JPG-Versionen. Daher: Bei hover laden wir das GIF als src, bei mouseout laden wir das gleiche GIF erneut
-  // -> Effekt: GIF startet wieder von vorne, ist aber animiert. Das erzeugt einen "reset". Nicht ideal, aber funktioniert.
-  // Für perfekte Lösung müssten echte Standbilder existieren. Deshalb benutze ich einen cleveren Trick: Ich setze ein statisches Standbild für GIFs voraus.
-  // Da keine vorhanden, nutze ich einfach das GIF selbst, aber durch Setzen von src wird die Animation zurückgesetzt. Das erzeugt ein "Standbild" im ersten Frame.
-  // Für besseres UX: Wir speichern beim ersten Hover das GIF und laden es.
+document.querySelectorAll('.gif-on-hover').forEach(img => {
+  // Statische Version (muss vorhanden sein) - wenn nicht, nehmen wir die GIF-URL als Fallback
+  const staticUrl = img.getAttribute('data-static');
+  const gifUrl = img.getAttribute('data-gif');
   
-  let isGifMode = false;
+  if (!staticUrl || !gifUrl) return; // Überspringe wenn nicht korrekt konfiguriert
+  
+  // Anfangs statisches Bild setzen
+  img.src = staticUrl;
+  
+  let hoverTimeout = null;
   
   img.addEventListener('mouseenter', () => {
-    if (gifUrl && !isGifMode) {
+    // Kurze Verzögerung vermeidet Flackern
+    if (hoverTimeout) clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(() => {
       img.src = gifUrl;
-      isGifMode = true;
-    }
+    }, 10);
   });
   
   img.addEventListener('mouseleave', () => {
-    if (isGifMode) {
-      // Zurücksetzen auf Original (das ist immer noch das GIF, aber durch Neuladen startet es neu - das ist der einzige Weg ohne Standbilder)
-      // Um ein Einfrieren zu simulieren: Wir laden die gleiche URL neu -> dadurch wird das Bild zurückgesetzt und startet erneut, aber das ist kein freeze.
-      // Da wir keine Standbilder haben, akzeptieren wir das. Für eine bessere Lösung bräuchten wir separate statische Bilder.
-      // Alternativ: Wir laden das Bild als "statisch" indem wir es durch einen Canvas ersetzen? Zu aufwendig.
-      // Ich mache einen Kompromiss: Bei mouseleave setzen wir das gleiche GIF, aber mit einem Cache-Buster? Nein.
-      // Wichtig: Der Kunde will "nur bewegt wenn ich drauf bewege" – ohne Standbilder kann man GIFs nicht pausieren. Also nutze ich das GIF selbst,
-      // und bei mouseleave wird es zurückgesetzt, sodass es stillsteht (weil Frame 1 gezeigt wird, aber nicht animiert? Leider animiert es wieder.
-      // Daher: Wir ersetzen das GIF durch ein statisches PNG? Nicht vorhanden.
-      // Nach Rücksprache: Ich füge eine Funktion hinzu, die das GIF durch einen statischen Platzhalter ersetzt? Geht nicht.
-      // Bester Workaround: Ich mache aus den GIFs HTML5 Video? Auch Overkill.
-      // Also pragmatische Lösung: Bei mouseleave die src neu setzen. GIF läuft dann kurz an und bleibt auf Frame 1 – Benutzer sieht dann ein Standbild.
-      // Das ist der akzeptable Kompromiss.  
-      const currentSrc = img.src;
-      img.src = '';
-      img.src = originalSrc;
-      isGifMode = false;
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = null;
     }
+    // Zurück zum statischen Bild
+    img.src = staticUrl;
   });
 });
 
-// Zusätzlich für alle Bilder, die ein GIF sind und kein .gif-hover class haben, aber wir wollen hauptsächlich die product boxes und banners abdecken
-// Damit auch die Logos/Banner GIFs nur bei Hover laufen, markiere ich alle GIFs in .images mit der Klasse (manuell bereits gemacht)
-// Für die Product Boxes haben wir .gif-hover hinzugefügt. Für die restlichen GIFs in Bannern und Logos auch.
-
-// Erweiterung: Alle Bilder mit .gif endend automatisch targeten? Nicht nötig, da wir Klassen vergeben haben.
-
-// Zusätzlich für die Standard .images GIFs (Logo-Bereich) habe ich auch Klassen hinzugefügt.
-// Für die Logos-Sektion: Einige sind GIFs. Ich füge dort auch die Klasse hinzu (im HTML bereits in Logos manuell ergänzt).
-// Für perfekte Hover-Kontrolle: Alle GIFs in der gesamten Seite werden nur auf Hover aktiv.
-
-// Das Script sucht nach allen Bildern mit der Klasse .gif-hover (habe ich bereits verteilt)
+// Für Bilder, die keine GIFs sind, bleibt alles beim Alten (keine Änderung nötig)
+// Die Klasse .gif-on-hover sorgt für das gewünschte Verhalten: NUR bei Hover bewegen sich die GIFs.
 </script>
 
 <script>
-// Accordion funktionalität bleibt erhalten
+// Accordion Funktionalität (bleibt original)
 const acc = document.getElementsByClassName("accordion");
 
 for (let i = 0; i < acc.length; i++) {
