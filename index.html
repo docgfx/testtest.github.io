@@ -149,31 +149,9 @@ h1 {
 }
 
 .images img {
-  width: 260px;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 16px;
-  filter: grayscale(100%);
   transition: 0.25s ease-in-out;
   background: #0c0c0c;
   border: 1px solid #2a2a2a;
-}
-
-/* custom fix for banners to keep consistent horizontal look */
-.images .banner-img {
-  width: 320px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 16px;
-}
-
-/* product boxes keep square but with better presentation */
-.images .product-img {
-  width: 260px;
-  height: 260px;
-  object-fit: contain;
-  background: #101010;
-  padding: 8px;
 }
 
 .images img:hover {
@@ -182,29 +160,36 @@ h1 {
   border-color: #5a5aff;
 }
 
-/* consistent aspect ratio classes */
+/* Discord Banner: 16:9 oder 1920x1080 proportion */
 .banner-strict {
   width: 320px;
   height: 180px;
   object-fit: cover;
   border-radius: 16px;
+  filter: grayscale(100%);
 }
 
+/* YouTube Thumbnails: 1280x720 = 16:9 */
 .thumb-strict {
-  width: 260px;
-  height: 146px;
+  width: 320px;
+  height: 180px;
   object-fit: cover;
   border-radius: 14px;
+  filter: grayscale(100%);
 }
 
+/* Logos: quadratisch 1:1 */
 .logo-strict {
   width: 240px;
   height: 240px;
   object-fit: contain;
   background: #0a0a0a;
-  padding: 10px;
+  padding: 12px;
+  border-radius: 20px;
+  filter: grayscale(100%);
 }
 
+/* Product Boxes: quadratisch 1:1 mit etwas Abstand */
 .product-strict {
   width: 260px;
   height: 260px;
@@ -212,25 +197,21 @@ h1 {
   background: #080808;
   border-radius: 20px;
   padding: 8px;
+  filter: grayscale(100%);
 }
 
-/* responsive */
+/* responsive anpassungen */
 @media (max-width: 700px) {
-  .images img, .images .banner-img, .images .product-img, .banner-strict, .thumb-strict, .logo-strict, .product-strict {
+  .banner-strict, .thumb-strict {
+    width: calc(100% - 20px);
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .logo-strict, .product-strict {
     width: calc(50% - 20px);
     height: auto;
     aspect-ratio: 1 / 1;
-  }
-  .banner-strict, .images .banner-img {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-  }
-  .thumb-strict {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    max-width: 260px;
   }
 }
 </style>
@@ -252,7 +233,7 @@ h1 {
   Join Discord
 </a>
 
-<!-- Websites area -->
+<!-- Websites -->
 <button class="accordion">
   <span class="left">
     <i class="fa-solid fa-globe icon"></i> Websites
@@ -285,7 +266,7 @@ h1 {
   </div>
 
   <button class="accordion">
-    <span class="left">Syndicate Theme <span class="price">€30</span></span>
+    <span class="left">Syndicate Theme <span class="price">€20</span></span>
     <i class="fa-solid fa-chevron-down"></i>
   </button>
   <div class="panel">
@@ -297,7 +278,7 @@ h1 {
   </div>
 </div>
 
-<!-- Logos section -->
+<!-- Logos (quadratisch) -->
 <button class="accordion">
   <span class="left">
     <i class="fa-solid fa-pen-nib icon"></i> Logos
@@ -306,19 +287,19 @@ h1 {
 </button>
 <div class="panel">
   <div class="images">
-    <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210394495090778/ws_logo.png?ex=69e8e1c4&is=69e79044&hm=dd8c7dfbe8e1a61a7d13e436ef85c15a541735a5666742fe91261e789c47f508&" alt="logo">
-    <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210395279294634/Logo.png?ex=69e8e1c4&is=69e79044&hm=37b658188295cebf3e5931ad8902a785f216ecd21bdf48e4ed9500455be81028&" alt="logo">
+    <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210394495090778/ws_logo.png?ex=69e8e1c4&is=69e79044&hm=dd8c7dfbe8e1a61a7d13e436ef85c15a541735a5666742fe91261e789c47f508&" alt="ws logo">
+    <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210395279294634/Logo.png?ex=69e8e1c4&is=69e79044&hm=37b658188295cebf3e5931ad8902a785f216ecd21bdf48e4ed9500455be81028&" alt="clean logo">
     <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1403211131878899845/X-Logo.png?ex=69e8e274&is=69e790f4&hm=8afc9f9a43a2512dc0aedabb7401a6977fe513e87d717b5c1033bd89c5e3493f&" alt="x logo">
     <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464035639627899/Sellauth-Logo-EngineX.png?ex=69e8ef9a&is=69e79e1a&hm=5214def87bed80bf220a2428a338f829bd126ef0aa8d413c29adf1f6704c5065&" alt="enginex">
-    <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464037225201675/Logo-Sharp-No-BG.png?ex=69e8ef9a&is=69e79e1a&hm=04053bf9a1acb782231f56b15a8ddf15e49b15b16aab28cb3a1c31ee818d186e&" alt="sharp">
-    <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464036117909675/VS-Xmas_no_bg.png?ex=69e8ef9a&is=69e79e1a&hm=eb627a480d978277775f1a61eecd5daf53d86ce5f16885dbe997be7eb20cdd89&" alt="xmas">
+    <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464037225201675/Logo-Sharp-No-BG.png?ex=69e8ef9a&is=69e79e1a&hm=04053bf9a1acb782231f56b15a8ddf15e49b15b16aab28cb3a1c31ee818d186e&" alt="sharp logo">
+    <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464036117909675/VS-Xmas_no_bg.png?ex=69e8ef9a&is=69e79e1a&hm=eb627a480d978277775f1a61eecd5daf53d86ce5f16885dbe997be7eb20cdd89&" alt="xmas logo">
     <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1440412914132713674/Final_Comp_2.gif?ex=69e91790&is=69e7c610&hm=d3ebe287d98acba00b9dcc5928c960179fa9a29b923fb947140fecc9096f55e2&" alt="animated">
     <img class="logo-strict" src="https://cdn.discordapp.com/attachments/1403170169437683842/1441212813224710225/S.gif?ex=69e8b4c7&is=69e76347&hm=0091b3cf28a4a7efe7a2fe3a0792e5b2f7a104ab2a8392610c2fb7e21564c300&" alt="S mark">
-    <img class="logo-strict" src="https://media.discordapp.net/attachments/1403170169437683842/1496197460832293038/ezgif.com-optimize_19.gif?ex=69e901f8&is=69e7b078&hm=16590b8d6bc1da0c4a1d7b3ba5e45936b1d4fbb41b4b658cac1d9874305ec1e9&=&width=1000&height=1000" alt="ezgif">
+    <img class="logo-strict" src="https://media.discordapp.net/attachments/1403170169437683842/1496197460832293038/ezgif.com-optimize_19.gif?ex=69e901f8&is=69e7b078&hm=16590b8d6bc1da0c4a1d7b3ba5e45936b1d4fbb41b4b658cac1d9874305ec1e9&=&width=1000&height=1000" alt="ezgif motion">
   </div>
 </div>
 
-<!-- Banners section with unified aspect ratio -->
+<!-- Discord Banner (16:9) -->
 <button class="accordion">
   <span class="left">
     <i class="fa-solid fa-image icon"></i> Banners
@@ -327,14 +308,14 @@ h1 {
 </button>
 <div class="panel">
   <div class="images">
-    <img class="banner-strict" src="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif?ex=69e8ce0a&is=69e77c8a&hm=e17f67ab4c4fe44633b704229aba93364c8b5bbdb37633bb3afac70190493f65&" alt="darkchair banner">
-    <img class="banner-strict" src="https://media.discordapp.net/attachments/1427005539094630462/1479919850577985646/Banner-2.png?ex=69e91dc3&is=69e7cc43&hm=c7f21003b3cf0b3434ec57526da7475e2852fe46ca3e0a351c394f33bcb26394=&format=webp&quality=lossless&width=1836&height=1032" alt="banner 2">
-    <img class="banner-strict" src="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69e92504&is=69e7d384&hm=44542e5e8bc21c86f22593bd943dae18f1c0eae9b4e58428e91e8a1ab84ee723&" alt="enginex banner">
-    <img class="banner-strict" src="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif?ex=69e9197a&is=69e7c7fa&hm=2e0fbc70e34561596f0d2493b737c508cb18a8c11861aa6ba3039f68fa46e9a5&=&width=1100&height=618" alt="server banner">
+    <img class="banner-strict" src="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif?ex=69e8ce0a&is=69e77c8a&hm=e17f67ab4c4fe44633b704229aba93364c8b5bbdb37633bb3afac70190493f65&" alt="DarkChair banner">
+    <img class="banner-strict" src="https://media.discordapp.net/attachments/1427005539094630462/1479919850577985646/Banner-2.png?ex=69e91dc3&is=69e7cc43&hm=c7f21003b3cf0b3434ec57526da7475e2852fe46ca3e0a351c394f33bcb26394=&format=webp&quality=lossless&width=1836&height=1032" alt="Banner 2">
+    <img class="banner-strict" src="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69e92504&is=69e7d384&hm=44542e5e8bc21c86f22593bd943dae18f1c0eae9b4e58428e91e8a1ab84ee723&" alt="EngineX banner">
+    <img class="banner-strict" src="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif?ex=69e9197a&is=69e7c7fa&hm=2e0fbc70e34561596f0d2493b737c508cb18a8c11861aa6ba3039f68fa46e9a5&=&width=1100&height=618" alt="Server banner">
   </div>
 </div>
 
-<!-- Product Boxes section (fixed ratio: square container with contain) -->
+<!-- Product Boxes (Mit den neuen Links, quadratisch) -->
 <button class="accordion">
   <span class="left">
     <i class="fa-solid fa-box-open icon"></i> Product Boxes
@@ -350,7 +331,7 @@ h1 {
   </div>
 </div>
 
-<!-- Thumbnails section with 16:9 ratio fix -->
+<!-- YouTube Thumbnails (16:9) -->
 <button class="accordion">
   <span class="left">
     <i class="fa-solid fa-video icon"></i> Thumbnails
@@ -359,9 +340,9 @@ h1 {
 </button>
 <div class="panel">
   <div class="images">
-    <img class="thumb-strict" src="https://cdn.discordapp.com/attachments/1424028192527749201/1424546285595262996/image.png?ex=69e8b7dd&is=69e7665d&hm=c0a52f2f06a36aebbc0294f0d4fe21af4c8dc806b085a35642f76d68a1e9231f&" alt="thumb v1">
-    <img class="thumb-strict" src="https://cdn.discordapp.com/attachments/1424028192527749201/1480634711998201978/thumbn.png?ex=69e91488&is=69e7c308&hm=e0e4b2beda891a05ae2638c004ab98168377eea993b56e13e4eebe49b21bfb20&" alt="thumb v2">
-    <img class="thumb-strict" src="https://cdn.discordapp.com/attachments/1424028192527749201/1487535591418495077/thumbn.png?ex=69e922fa&is=69e7d17a&hm=b38fa07f93d430492ab7d884a6e97ab12e06c389e9e646e6be497df82cb648f2&" alt="thumb v3">
+    <img class="thumb-strict" src="https://cdn.discordapp.com/attachments/1424028192527749201/1424546285595262996/image.png?ex=69e8b7dd&is=69e7665d&hm=c0a52f2f06a36aebbc0294f0d4fe21af4c8dc806b085a35642f76d68a1e9231f&" alt="thumbnail design">
+    <img class="thumb-strict" src="https://cdn.discordapp.com/attachments/1424028192527749201/1480634711998201978/thumbn.png?ex=69e91488&is=69e7c308&hm=e0e4b2beda891a05ae2638c004ab98168377eea993b56e13e4eebe49b21bfb20&" alt="youtube thumb v2">
+    <img class="thumb-strict" src="https://cdn.discordapp.com/attachments/1424028192527749201/1487535591418495077/thumbn.png?ex=69e922fa&is=69e7d17a&hm=b38fa07f93d430492ab7d884a6e97ab12e06c389e9e646e6be497df82cb648f2&" alt="youtube thumb v3">
   </div>
 </div>
 
