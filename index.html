@@ -176,26 +176,14 @@ footer a:hover{color:#fff}
 .color-picker-wrapper input[type="color"]::-webkit-color-swatch{border:none;border-radius:6px}
 .color-picker-wrapper .color-hex{color:var(--muted2);font-size:12px;font-family:monospace;letter-spacing:0.04em}
 
-/* Empty sub-panel placeholder */
 .empty-placeholder{padding:40px 20px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed var(--border);border-radius:var(--radius);aspect-ratio:unset!important;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .empty-placeholder i{display:block;font-size:22px;margin-bottom:8px;opacity:0.4}
-
-/* Banner sub-panels: wide 16/9 items */
-#panel-profile-banners .img-grid .img-item,
-#panel-embed-banners .img-grid .img-item,
-#panel-signatures .img-grid .img-item{aspect-ratio:16/9}
-
-/* Profile banners: narrower portrait format option — keep 16/9 for now */
-/* Signatures can be wider banner strips */
-#panel-signatures .img-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-
-/* Product Cards: landscape card format */
+#panel-profile-banners .img-grid .img-item{aspect-ratio:5/2}
+#panel-embed-banners .img-grid .img-item{aspect-ratio:3/1}
+#panel-signatures .img-grid .img-item{aspect-ratio:728/90}
+#panel-signatures .img-grid{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
 #panel-product-cards-panel .product-grid .product-item{aspect-ratio:16/9}
 #panel-product-cards-panel .product-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
-
-/* Make placeholder span full width when alone in grid */
-.img-grid .empty-placeholder,
-.product-grid .empty-placeholder{grid-column:1/-1}
 
 @media(max-width:640px){
   .img-item.wide{grid-column:span 1;aspect-ratio:1/1}
@@ -476,7 +464,6 @@ function initTabGroup(tabsContainerId) {
 initTabGroup('bannerTabs');
 initTabGroup('productTabs');
 
-// ---- Dynamic GFX ----
 const categoryGridMap = {
   'Logos': 'grid-logos',
   'Server Banners': 'grid-server-banners',
@@ -487,12 +474,9 @@ const categoryGridMap = {
   'Product Cards': 'grid-cards',
   'Websites': 'grid-websites',
   'Thumbnails': 'grid-thumbnails',
-  // legacy support
-  'Banners': 'grid-server-banners',
-  'Product Boxes (legacy)': 'grid-boxes'
+  'Banners': 'grid-server-banners'
 };
 
-// Map each grid to its external placeholder id
 const gridPlaceholderMap = {
   'grid-profile-banners': 'placeholder-profile-banners',
   'grid-embed-banners': 'placeholder-embed-banners',
@@ -503,7 +487,6 @@ const gridPlaceholderMap = {
 function loadDynamicGFX(){
   const items = JSON.parse(localStorage.getItem('docgfx_items') || '[]');
   document.querySelectorAll('.dyn-item').forEach(el => el.remove());
-  // Reset all external placeholders to visible
   Object.values(gridPlaceholderMap).forEach(pid => {
     const p = document.getElementById(pid);
     if (p) p.style.display = '';
@@ -516,7 +499,6 @@ function loadDynamicGFX(){
     if (!gridId) return;
     const grid = document.getElementById(gridId);
     if (!grid) return;
-    // Hide external placeholder when items exist
     const phId = gridPlaceholderMap[gridId];
     if (phId) { const ph = document.getElementById(phId); if (ph) ph.style.display = 'none'; }
     list.forEach((item, index) => {
@@ -558,7 +540,6 @@ function deleteItemById(id){
 
 function escapeHtml(str){ return str.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]||m)); }
 
-// ---- Auth ----
 const loginOverlay = document.getElementById('loginOverlay');
 function showLogin(){ loginOverlay.classList.add('open'); }
 function hideLogin(){ loginOverlay.classList.remove('open'); }
@@ -587,7 +568,6 @@ function performLogout(){isLoggedIn=false;closeAdminPanel();hideLogin();loadDyna
 document.getElementById('discordLoginBtn').addEventListener('click',startDiscordLogin);
 document.getElementById('loginError').style.display='none';
 
-// ---- Admin panel ----
 const adminOverlay=document.getElementById('adminOverlay');
 function openAdminPanel(){if(isLoggedIn)adminOverlay.classList.add('open');else showLogin();}
 function closeAdminPanel(){adminOverlay.classList.remove('open');}
@@ -642,7 +622,6 @@ function showAdminStatus(msg,type){
   setTimeout(()=>{s.className='nstatus';},3500);
 }
 
-// ---- Scroll reveal ----
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.07});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
