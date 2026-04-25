@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DocGFX — Premium Graphics</title>
+<title>DocGFX</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
@@ -68,6 +68,18 @@ h1 em{font-style:normal;color:var(--muted)}
 .price-tag:hover{border-color:var(--border-h);color:#fff}
 .divider{height:1px;background:var(--border)}
 
+/* Sub-section tabs for Banners */
+.sub-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.sub-tab{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.05em;padding:7px 15px;border-radius:100px;cursor:pointer;transition:all 0.18s}
+.sub-tab:hover{border-color:var(--border-h);color:#fff}
+.sub-tab.active{background:#fff;color:#000;border-color:#fff}
+
+/* Sub-section panels */
+.sub-panel{display:none}
+.sub-panel.active{display:block}
+
+.sub-section-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;margin-top:4px}
+
 .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
 .video-card{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);transition:border-color 0.22s,transform 0.22s}
 .video-card:hover{border-color:var(--border-h);transform:translateY(-3px)}
@@ -86,11 +98,15 @@ h1 em{font-style:normal;color:var(--muted)}
 .overlay-label{font-size:11px;font-weight:500;color:rgba(255,255,255,0.8);display:flex;align-items:center;gap:6px}
 .overlay-label::before{content:'';width:5px;height:5px;border-radius:50%;background:#fff;flex-shrink:0}
 
+/* Products section */
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
 .product-item{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);aspect-ratio:1/1;transition:border-color 0.22s,transform 0.22s,box-shadow 0.22s;contain:layout paint}
 .product-item img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(60%);transition:filter 0.3s,transform 0.3s;will-change:filter}
 .product-item:hover{border-color:rgba(255,255,255,0.18);transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,0.5)}
 .product-item:hover img{filter:grayscale(0%);transform:scale(1.03)}
+
+/* Product sub-type badge on item */
+.product-type-badge{position:absolute;bottom:9px;left:9px;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);border:1px solid var(--border);color:var(--muted2);font-size:9px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:3px 9px;border-radius:100px;pointer-events:none;transition:opacity 0.2s}
 
 .dynamic-section{padding:0 2rem 80px;max-width:1100px;margin:0 auto}
 .dynamic-section h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3.5vw,32px);font-weight:800;letter-spacing:-0.02em;color:#fff;margin-bottom:8px}
@@ -105,6 +121,9 @@ h1 em{font-style:normal;color:var(--muted)}
 .dyn-title{font-size:12px;font-weight:600;color:#fff}
 .dyn-cat{font-size:10px;color:var(--muted2);letter-spacing:0.06em;text-transform:uppercase}
 .dyn-new{position:absolute;top:8px;right:8px;background:#fff;color:#000;font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:0.06em}
+.dyn-delete{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);color:#ff6b6b;border:1px solid rgba(255,107,107,0.3);border-radius:100px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity 0.2s,background 0.2s;font-size:11px;z-index:5}
+.dyn-delete:hover{background:#ff4444;color:#fff;border-color:#ff4444}
+.dyn-item:hover .dyn-delete{opacity:1}
 
 .cta{margin:0 2rem 80px;max-width:1100px;margin-left:auto;margin-right:auto;padding:64px 40px;text-align:center;border-radius:20px;border:1px solid var(--border);background:var(--surface);position:relative;overflow:hidden}
 .cta::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:400px;height:250px;background:radial-gradient(ellipse,rgba(255,255,255,0.04) 0%,transparent 70%);pointer-events:none}
@@ -117,20 +136,21 @@ footer a:hover{color:#fff}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* LOGIN OVERLAY */
 .login-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:300;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
 .login-overlay.open{display:flex}
-.login-panel{background:#0f0f0f;border:1px solid var(--border-h);border-radius:20px;padding:32px;width:90%;max-width:360px}
-.login-panel h3{font-family:'Syne',sans-serif;font-size:20px;margin-bottom:20px;text-align:center}
-.login-panel input{width:100%;background:#161616;border:1px solid var(--border);border-radius:10px;padding:12px;color:#fff;margin-bottom:14px;font-family:'DM Sans',sans-serif}
-.login-panel input:focus{outline:none;border-color:var(--border-h)}
-.login-error{color:#ff6b6b;font-size:12px;margin-top:10px;text-align:center;display:none}
-.login-panel button{width:100%;margin-top:8px}
+.login-panel{background:#0f0f0f;border:1px solid var(--border-h);border-radius:20px;padding:32px;width:90%;max-width:380px;text-align:center}
+.login-panel h3{font-family:'Syne',sans-serif;font-size:20px;margin-bottom:8px;color:#fff}
+.login-panel p{color:var(--muted);font-size:13px;margin-bottom:20px}
+.login-panel .discord-login-btn{display:inline-flex;align-items:center;gap:10px;background:#5865F2;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;padding:14px 28px;border-radius:10px;border:none;cursor:pointer;transition:background 0.18s,transform 0.18s;text-decoration:none}
+.login-panel .discord-login-btn:hover{background:#4752c4;transform:translateY(-2px)}
+.login-panel .discord-login-btn i{font-size:20px}
+.login-error{color:#ff6b6b;font-size:12px;margin-top:14px;text-align:center;display:none}
+.logout-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:11px;padding:6px 14px;border-radius:100px;cursor:pointer;margin-top:16px;transition:all 0.18s}
+.logout-btn:hover{border-color:var(--border-h);color:#fff}
 
-/* ADMIN PANEL */
 .admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
 .admin-overlay.open{display:flex}
-.admin-panel{background:#0f0f0f;border:1px solid var(--border-h);border-radius:20px;padding:28px;width:90%;max-width:500px;position:relative;max-height:85vh;overflow-y:auto}
+.admin-panel{background:#0f0f0f;border:1px solid var(--border-h);border-radius:20px;padding:28px;width:90%;max-width:540px;position:relative;max-height:85vh;overflow-y:auto}
 .admin-panel h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px;color:#fff}
 .admin-desc{color:var(--muted);font-size:13px;margin-bottom:22px}
 .admin-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;transition:color 0.18s}
@@ -144,9 +164,21 @@ footer a:hover{color:#fff}
 .btn-sm:hover{background:#e8e8e8}
 .btn-sm.sec{background:#161616;color:#fff;border:1px solid var(--border)}
 .btn-sm.sec:hover{background:#222}
+.btn-sm.danger{background:#ff4444;color:#fff}
+.btn-sm.danger:hover{background:#cc0000}
 .nstatus{font-size:12px;margin-top:14px;padding:8px 12px;border-radius:9px;display:none}
 .nstatus.ok{background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.1);display:block}
 .nstatus.err{background:rgba(255,80,80,0.08);color:#ff6b6b;border:1px solid rgba(255,80,80,0.2);display:block}
+
+.color-picker-wrapper{display:flex;align-items:center;gap:10px}
+.color-picker-wrapper input[type="color"]{width:40px;height:40px;border:1px solid var(--border);border-radius:8px;background:transparent;cursor:pointer;padding:2px}
+.color-picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper{padding:0}
+.color-picker-wrapper input[type="color"]::-webkit-color-swatch{border:none;border-radius:6px}
+.color-picker-wrapper .color-hex{color:var(--muted2);font-size:12px;font-family:monospace;letter-spacing:0.04em}
+
+/* Empty sub-panel placeholder */
+.empty-placeholder{padding:40px 0;text-align:center;color:var(--muted);font-size:13px;border:1px dashed var(--border);border-radius:var(--radius)}
+.empty-placeholder i{display:block;font-size:22px;margin-bottom:8px;opacity:0.4}
 
 @media(max-width:640px){
   .img-item.wide{grid-column:span 1;aspect-ratio:1/1}
@@ -200,9 +232,14 @@ footer a:hover{color:#fff}
 <div id="portfolio"></div>
 <div id="dynamicSection"></div>
 
-<!-- WEBSITES -->
-<section class="section reveal">
-  <div class="section-header"><div><span class="section-tag">01 — <span data-t="secWebsites">Websites</span></span><h2 class="section-title" data-t="secWebsitesTitle">Custom Website<br>Themes</h2></div></div>
+<!-- 01 Websites -->
+<section class="section reveal" id="sec-websites">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">01 — <span data-t="secWebsites">Websites</span></span>
+      <h2 class="section-title" data-t="secWebsitesTitle">Custom Website<br>Themes</h2>
+    </div>
+  </div>
   <div class="video-grid">
     <div class="video-card"><span class="v-label">Hyper Theme</span><span class="v-price">€25</span><iframe src="https://player.vimeo.com/video/1185284072?h=6a34a574dc&title=0&byline=0&portrait=0" loading="lazy" allow="fullscreen"></iframe></div>
     <div class="video-card"><span class="v-label">ClassiX Theme</span><span class="v-price">€20</span><iframe src="https://player.vimeo.com/video/1185651008?h=cad3867de9&title=0&byline=0&portrait=0" loading="lazy" allow="fullscreen"></iframe></div>
@@ -211,10 +248,16 @@ footer a:hover{color:#fff}
 </section>
 <div class="divider"></div>
 
-<!-- LOGOS -->
-<section class="section reveal">
-  <div class="section-header"><div><span class="section-tag">02 — <span data-t="secLogos">Logos</span></span><h2 class="section-title" data-t="secLogosTitle">Brand Identity<br>& Logos</h2></div><a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> €10</a></div>
-  <div class="img-grid">
+<!-- 02 Logos -->
+<section class="section reveal" id="sec-logos">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">02 — <span data-t="secLogos">Logos</span></span>
+      <h2 class="section-title" data-t="secLogosTitle">Brand Identity<br>& Logos</h2>
+    </div>
+    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> €10</a>
+  </div>
+  <div class="img-grid" id="grid-logos">
     <div class="img-item"><img src="https://media.discordapp.net/attachments/1403170169437683842/1403210394495090778/ws_logo.png?ex=69ed7f04&is=69ec2d84&hm=225c68fca701edf2d2370899a569f5e8c2c8ae66e5977bdbc5abbbfab2ec311c&=&format=webp&quality=lossless&width=1250&height=1282" loading="lazy" alt="WS Logo"><div class="img-overlay"><span class="overlay-label">WS Logo</span></div></div>
     <div class="img-item"><img src="https://media.discordapp.net/attachments/1403170169437683842/1439464035639627899/Sellauth-Logo-EngineX.png?ex=69ed8cda&is=69ec3b5a&hm=ca9bd70e0ecaad43b179b4d49b5b700bfe0c888a7ba8d742fe48e4e738ba44dc&=&format=webp&quality=lossless&width=1282&height=1282" loading="lazy" alt="Logo"><div class="img-overlay"><span class="overlay-label">Custom Logo</span></div></div>
     <div class="img-item"><img src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464036117909675/VS-Xmas_no_bg.png?ex=69ed8cda&is=69ec3b5a&hm=ec61efa1638567e495a37a1b90de59bbf12fb598fa7f3155f2ca6949bc4e4840&" loading="lazy" alt="Christmas Logo"><div class="img-overlay"><span class="overlay-label">Christmas Logo</span></div></div>
@@ -223,111 +266,302 @@ footer a:hover{color:#fff}
 </section>
 <div class="divider"></div>
 
-<!-- BANNERS -->
-<section class="section reveal">
-  <div class="section-header"><div><span class="section-tag">03 — <span data-t="secBanners">Banners</span></span><h2 class="section-title" data-t="secBannersTitle">Discord & Server<br>Banners</h2></div><a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> €15</a></div>
-  <div class="img-grid">
-    <div class="img-item wide"><img src="https://media.discordapp.net/attachments/1427005539094630462/1479919850032861366/banner.png?ex=69edbb03&is=69ec6983&hm=466c7f5df550ea76f08d47870d1d113d7c67bc21a64ce5ef6bf6d2cc06455faa&=&format=webp&quality=lossless&width=1920&height=1080" loading="lazy" alt="DarkChair"><div class="img-overlay"><span class="overlay-label">DarkChair</span></div></div>
-    <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69edc244&is=69ec70c4&hm=143076c5e730bee4698a137bf6dfe82bccf9f7995f60d3e0ac3c80fdaf091ae9&" loading="lazy" alt="Server Banner"><div class="img-overlay"><span class="overlay-label">Server Banner</span></div></div>
+<!-- 03 Banners — mit Unterkategorien -->
+<section class="section reveal" id="sec-banners">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">03 — <span data-t="secBanners">Banners</span></span>
+      <h2 class="section-title" data-t="secBannersTitle">Banners</h2>
+    </div>
+    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> <span data-t="bannerFromPrice">from €10</span></a>
+  </div>
+
+  <!-- Sub-navigation Tabs -->
+  <div class="sub-tabs" id="bannerTabs">
+    <button class="sub-tab active" data-panel="server-banners">Server Banner</button>
+    <button class="sub-tab" data-panel="profile-banners">Profile Banner</button>
+    <button class="sub-tab" data-panel="embed-banners">Embed Banners</button>
+    <button class="sub-tab" data-panel="signatures">Signatures</button>
+  </div>
+
+  <!-- Server Banner -->
+  <div class="sub-panel active" id="panel-server-banners">
+    <div class="sub-section-label" data-t="subServerBanners">Server Banners — <span style="color:var(--muted2)">€15</span></div>
+    <div class="img-grid" id="grid-server-banners">
+      <div class="img-item wide"><img src="https://media.discordapp.net/attachments/1427005539094630462/1479919850032861366/banner.png?ex=69edbb03&is=69ec6983&hm=466c7f5df550ea76f08d47870d1d113d7c67bc21a64ce5ef6bf6d2cc06455faa&=&format=webp&quality=lossless&width=1920&height=1080" loading="lazy" alt="DarkChair"><div class="img-overlay"><span class="overlay-label">DarkChair</span></div></div>
+      <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif?ex=69edc244&is=69ec70c4&hm=143076c5e730bee4698a137bf6dfe82bccf9f7995f60d3e0ac3c80fdaf091ae9&" loading="lazy" alt="Server Banner"><div class="img-overlay"><span class="overlay-label">Server Banner</span></div></div>
+    </div>
+  </div>
+
+  <!-- Profile Banner -->
+  <div class="sub-panel" id="panel-profile-banners">
+    <div class="sub-section-label" data-t="subProfileBanners">Profile Banners</div>
+    <div class="img-grid" id="grid-profile-banners">
+      <div class="empty-placeholder"><i class="fa-regular fa-image"></i>Coming soon — check Discord for updates</div>
+    </div>
+  </div>
+
+  <!-- Embed Banners -->
+  <div class="sub-panel" id="panel-embed-banners">
+    <div class="sub-section-label" data-t="subEmbedBanners">Embed Banners</div>
+    <div class="img-grid" id="grid-embed-banners">
+      <div class="empty-placeholder"><i class="fa-regular fa-image"></i>Coming soon — check Discord for updates</div>
+    </div>
+  </div>
+
+  <!-- Signatures -->
+  <div class="sub-panel" id="panel-signatures">
+    <div class="sub-section-label" data-t="subSignatures">Signatures</div>
+    <div class="img-grid" id="grid-signatures">
+      <div class="empty-placeholder"><i class="fa-regular fa-image"></i>Coming soon — check Discord for updates</div>
+    </div>
   </div>
 </section>
 <div class="divider"></div>
 
-<!-- PRODUCT BOXES -->
-<section class="section reveal">
-  <div class="section-header"><div><span class="section-tag">04 — <span data-t="secBoxes">Product Boxes</span></span><h2 class="section-title" data-t="secBoxesTitle">Product<br>Artwork</h2></div><a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> €3</a></div>
-  <div class="product-grid">
-    <div class="product-item"><img src="https://media.discordapp.net/attachments/1403210515307565116/1451238374659588148/Box-New.png?ex=69ed89cf&is=69ec384f&hm=6b4b1b63e34af0bcd5ba3a30f7ac70e7ff9399d83ea2df2e35ff2f87a9449a36&=&format=webp&quality=lossless&width=1282&height=1282" loading="lazy" alt="Omega"></div>
-    <div class="product-item"><img src="https://media.discordapp.net/attachments/1403210515307565116/1480967045007802418/Hise-Cod-no-bg.png?ex=69ed95ca&is=69ec444a&hm=31b0c0c540626974b1ff4eaf9dcc2819a9eeb566153242d943e90424e05b79a9&=&format=webp&quality=lossless&width=2170&height=1282" loading="lazy" alt="Box New"></div>
-    <div class="product-item"><img src="https://media.discordapp.net/attachments/1403210515307565116/1480967046669008906/Crunchy-Box-no-bg.png?ex=69ed95ca&is=69ec444a&hm=10999ac546f4a21754bda39b60bf0b31f1164da75155e6c7ad502885d81dac3c&=&format=webp&quality=lossless&width=2170&height=1282" loading="lazy" alt="UA"></div>
-    <div class="product-item"><img src="https://media.discordapp.net/attachments/1403210515307565116/1458399313888805038/Rust-Int.png?ex=69ede1b4&is=69ec9034&hm=2e0cb657bd9f99376bd67d07d60e454a389c8fc4408280ce664b509e5c7cd46e&=&format=webp&quality=lossless&width=2170&height=1282" loading="lazy" alt="Rust Int"></div>
+<!-- 04 Products (Boxes + Cards) -->
+<section class="section reveal" id="sec-products">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">04 — <span data-t="secProducts">Products</span></span>
+      <h2 class="section-title" data-t="secProductsTitle">Product<br>Artwork</h2>
+    </div>
+    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> <span data-t="productFromPrice">from €3</span></a>
+  </div>
+
+  <!-- Sub-navigation Tabs -->
+  <div class="sub-tabs" id="productTabs">
+    <button class="sub-tab active" data-panel="product-boxes-panel">Product Boxes</button>
+    <button class="sub-tab" data-panel="product-cards-panel">Product Cards</button>
+  </div>
+
+  <!-- Product Boxes -->
+  <div class="sub-panel active" id="panel-product-boxes-panel">
+    <div class="sub-section-label" data-t="subProductBoxes">Product Boxes — <span style="color:var(--muted2)">€3</span></div>
+    <div class="product-grid" id="grid-boxes">
+      <div class="product-item">
+        <img src="https://media.discordapp.net/attachments/1403210515307565116/1451238374659588148/Box-New.png?ex=69ed89cf&is=69ec384f&hm=6b4b1b63e34af0bcd5ba3a30f7ac70e7ff9399d83ea2df2e35ff2f87a9449a36&=&format=webp&quality=lossless&width=1282&height=1282" loading="lazy" alt="Omega">
+        <div class="product-type-badge">Box</div>
+      </div>
+      <div class="product-item">
+        <img src="https://media.discordapp.net/attachments/1403210515307565116/1480967045007802418/Hise-Cod-no-bg.png?ex=69ed95ca&is=69ec444a&hm=31b0c0c540626974b1ff4eaf9dcc2819a9eeb566153242d943e90424e05b79a9&=&format=webp&quality=lossless&width=2170&height=1282" loading="lazy" alt="Box New">
+        <div class="product-type-badge">Box</div>
+      </div>
+      <div class="product-item">
+        <img src="https://media.discordapp.net/attachments/1403210515307565116/1480967046669008906/Crunchy-Box-no-bg.png?ex=69ed95ca&is=69ec444a&hm=10999ac546f4a21754bda39b60bf0b31f1164da75155e6c7ad502885d81dac3c&=&format=webp&quality=lossless&width=2170&height=1282" loading="lazy" alt="UA">
+        <div class="product-type-badge">Box</div>
+      </div>
+      <div class="product-item">
+        <img src="https://media.discordapp.net/attachments/1403210515307565116/1458399313888805038/Rust-Int.png?ex=69ede1b4&is=69ec9034&hm=2e0cb657bd9f99376bd67d07d60e454a389c8fc4408280ce664b509e5c7cd46e&=&format=webp&quality=lossless&width=2170&height=1282" loading="lazy" alt="Rust Int">
+        <div class="product-type-badge">Box</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Cards -->
+  <div class="sub-panel" id="panel-product-cards-panel">
+    <div class="sub-section-label" data-t="subProductCards">Product Cards</div>
+    <div class="product-grid" id="grid-cards">
+      <div class="empty-placeholder" style="grid-column:1/-1"><i class="fa-regular fa-rectangle-list"></i>Coming soon — check Discord for updates</div>
+    </div>
   </div>
 </section>
 <div class="divider"></div>
 
-<!-- THUMBNAILS -->
-<section class="section reveal">
-  <div class="section-header"><div><span class="section-tag">05 — <span data-t="secThumbs">Thumbnails</span></span><h2 class="section-title" data-t="secThumbsTitle">YouTube<br>Thumbnails</h2></div><a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> €5</a></div>
-  <div class="img-grid">
+<!-- 05 Thumbnails -->
+<section class="section reveal" id="sec-thumbnails">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">05 — <span data-t="secThumbs">Thumbnails</span></span>
+      <h2 class="section-title" data-t="secThumbsTitle">YouTube<br>Thumbnails</h2>
+    </div>
+    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> €5</a>
+  </div>
+  <div class="img-grid" id="grid-thumbnails">
     <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1424028192527749201/1487535591418495077/thumbn.png?ex=69edc03a&is=69ec6eba&hm=3a69bb05d41fb8e32a1b147a22134c93863e4df10920fedec9fcd4ce9057663e&" loading="lazy" alt="Thumbnail"><div class="img-overlay"><span class="overlay-label">Thumbnail</span></div></div>
     <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1424028192527749201/1480634711998201978/thumbn.png?ex=69edb1c8&is=69ec6048&hm=09b170da88088d832a1f0b77e052d3d11f76378c6dfb1a6fdb568c63bd32b53b&" loading="lazy" alt="Thumbnail"><div class="img-overlay"><span class="overlay-label">Thumbnail</span></div></div>
     <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1424028192527749201/1424546285595262996/image.png?ex=69ed551d&is=69ec039d&hm=23c60d419c4c2fb43595fd9aa8731e10dae1dbba6b26102292c216894992ba1d&" loading="lazy" alt="Thumbnail"><div class="img-overlay"><span class="overlay-label">Thumbnail</span></div></div>
   </div>
 </section>
 
-<div class="cta reveal" style="margin-top:0">
-  <h2 class="cta-title" data-t="ctaTitle">Ready for your next<br><span style="color:var(--muted)">Project?</span></h2>
-  <p class="cta-sub" data-t="ctaSub">Join the Discord and order your custom GFX directly.</p>
-  <a href="https://discord.gg/SNHbWq7hPt" class="btn-primary" style="font-size:13px;padding:14px 32px"><i class="fa-brands fa-discord"></i> <span data-t="joinDiscord">Join Discord</span></a>
-</div>
+<div class="cta reveal"><h2 class="cta-title" data-t="ctaTitle">Ready for your next<br><span style="color:var(--muted)">Project?</span></h2><p class="cta-sub" data-t="ctaSub">Join the Discord and order your custom GFX directly.</p><a href="https://discord.gg/SNHbWq7hPt" class="btn-primary" style="font-size:13px;padding:14px 32px"><i class="fa-brands fa-discord"></i> <span data-t="joinDiscord">Join Discord</span></a></div>
 
 <footer><span>© 2025 DocGFX</span><span style="color:var(--border-h)">·</span><a href="https://discord.gg/SNHbWq7hPt"><i class="fa-brands fa-discord"></i> Discord</a><span style="color:var(--border-h)">·</span><button class="admin-link" id="adminBtnFooter" style="background:none;border:none;font-size:11px;padding:0;gap:4px"><i class="fa-solid fa-lock" style="font-size:9px"></i> Admin</button></footer>
 
-<!-- LOGIN OVERLAY -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-panel">
-    <h3><i class="fa-solid fa-shield-hooded"></i> Admin Login</h3>
-    <input type="text" id="loginUser" placeholder="Username" autocomplete="off">
-    <input type="password" id="loginPass" placeholder="Password">
-    <div class="login-error" id="loginError">Invalid credentials</div>
-    <button class="btn-sm" id="loginSubmit" style="width:100%;justify-content:center">Login</button>
+    <h3><i class="fa-brands fa-discord"></i> Admin Login</h3>
+    <p>Login with your Discord account to manage GFX</p>
+    <button class="discord-login-btn" id="discordLoginBtn">
+      <i class="fa-brands fa-discord"></i> Login with Discord
+    </button>
+    <div class="login-error" id="loginError">Access denied. Only the owner can login.</div>
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div class="admin-overlay" id="adminOverlay">
   <div class="admin-panel">
     <button class="admin-close" id="adminClose"><i class="fa-solid fa-xmark"></i></button>
-    <h3>Admin — Add GFX</h3>
-    <p class="admin-desc">Upload new artwork • Webhook ready</p>
+    <h3>Admin — Manage GFX</h3>
+    <p class="admin-desc">Add new artwork or delete existing ones (only visible when logged in)</p>
     <div class="form-group"><label>Discord Webhook URL</label><div class="wh-row"><input type="text" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..."><button class="btn-sm sec" id="saveWebhook"><i class="fa-solid fa-floppy-disk"></i> Save</button></div></div>
+    <div class="form-group"><label>Embed Color</label><div class="color-picker-wrapper"><input type="color" id="embedColor" value="#ffffff"><span class="color-hex" id="colorHexDisplay">#FFFFFF</span></div></div>
     <div class="form-group"><label>Image URL</label><input type="text" id="adminImgUrl" placeholder="https://cdn.discordapp.com/..."></div>
     <div class="form-group"><label>Title</label><input type="text" id="adminTitle" placeholder="e.g. Cyberpunk Banner"></div>
-    <div class="form-group"><label>Category</label><select id="adminCategory"><option>Logos</option><option>Banners</option><option>Thumbnails</option><option>Product Boxes</option><option>Websites</option></select></div>
-    <div style="display:flex;gap:12px;margin-top:8px"><button class="btn-sm" id="adminAddBtn"><i class="fa-regular fa-paper-plane"></i> Add & Notify</button><button class="btn-sm sec" id="adminCancelBtn">Cancel</button></div>
+    <div class="form-group">
+      <label>Category</label>
+      <select id="adminCategory">
+        <option value="Logos">Logos</option>
+        <option value="Server Banners">Server Banners</option>
+        <option value="Profile Banners">Profile Banners</option>
+        <option value="Embed Banners">Embed Banners</option>
+        <option value="Signatures">Signatures</option>
+        <option value="Product Boxes">Product Boxes</option>
+        <option value="Product Cards">Product Cards</option>
+        <option value="Websites">Websites</option>
+        <option value="Thumbnails">Thumbnails</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
+      <button class="btn-sm" id="adminAddBtn"><i class="fa-regular fa-paper-plane"></i> Add & Notify</button>
+      <button class="btn-sm sec" id="adminCancelBtn">Cancel</button>
+      <button class="btn-sm danger" id="adminLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </div>
     <div class="nstatus" id="adminStatus"></div>
   </div>
 </div>
 
 <script>
-const ADMIN_USER = "Fragmora";
-const ADMIN_PASS = "Fragmora2025%";
+const DISCORD_CLIENT_ID = '1497683597077778493';
+const ALLOWED_USER_ID = '1294570988788518975';
+const REDIRECT_URI = window.location.origin + window.location.pathname;
 let isLoggedIn = false;
 
-const T={en:{badge:"Premium Graphics Studio",heroSub:"Websites · Logos · Banners · Thumbnails · Product Boxes",joinDiscord:"Join Discord",viewPortfolio:"View Portfolio",adminLink:"Admin",statProjects:"Projects",statFrom:"Starting From",statThemes:"Website Themes",statRating:"Rating",secWebsites:"Websites",secWebsitesTitle:"Custom Website<br>Themes",secLogos:"Logos",secLogosTitle:"Brand Identity<br>& Logos",secBanners:"Banners",secBannersTitle:"Discord & Server<br>Banners",secBoxes:"Product Boxes",secBoxesTitle:"Product<br>Artwork",secThumbs:"Thumbnails",secThumbsTitle:"YouTube<br>Thumbnails",ctaTitle:"Ready for your next<br><span style='color:var(--muted)'>Project?</span>",ctaSub:"Join the Discord and order your custom GFX directly."},de:{badge:"Premium Graphics Studio",heroSub:"Websites · Logos · Banner · Thumbnails · Produkt-Boxen",joinDiscord:"Discord beitreten",viewPortfolio:"Portfolio ansehen",adminLink:"Admin",statProjects:"Projekte",statFrom:"Ab Preis",statThemes:"Website Themes",statRating:"Bewertung",secWebsites:"Websites",secWebsitesTitle:"Individuelle<br>Website Themes",secLogos:"Logos",secLogosTitle:"Markenidentität<br>& Logos",secBanners:"Banner",secBannersTitle:"Discord & Server<br>Banner",secBoxes:"Produkt-Boxen",secBoxesTitle:"Produkt<br>Artwork",secThumbs:"Thumbnails",secThumbsTitle:"YouTube<br>Thumbnails",ctaTitle:"Bereit für dein<br>nächstes <span style='color:var(--muted)'>Projekt?</span>",ctaSub:"Tritt dem Discord bei und bestell direkt dein Custom GFX."}};
+const T={en:{badge:"Premium Graphics Studio",heroSub:"Websites · Logos · Banners · Thumbnails · Product Boxes",joinDiscord:"Join Discord",viewPortfolio:"View Portfolio",adminLink:"Admin",statProjects:"Projects",statFrom:"Starting From",statThemes:"Website Themes",statRating:"Rating",secWebsites:"Websites",secWebsitesTitle:"Custom Website<br>Themes",secLogos:"Logos",secLogosTitle:"Brand Identity<br>& Logos",secBanners:"Banners",secBannersTitle:"Banners",secProducts:"Products",secProductsTitle:"Product<br>Artwork",secThumbs:"Thumbnails",secThumbsTitle:"YouTube<br>Thumbnails",ctaTitle:"Ready for your next<br><span style='color:var(--muted)'>Project?</span>",ctaSub:"Join the Discord and order your custom GFX directly.",bannerFromPrice:"from €10",productFromPrice:"from €3",subServerBanners:"Server Banners",subProfileBanners:"Profile Banners",subEmbedBanners:"Embed Banners",subSignatures:"Signatures",subProductBoxes:"Product Boxes",subProductCards:"Product Cards"},de:{badge:"Premium Graphics Studio",heroSub:"Websites · Logos · Banner · Thumbnails · Produkt-Boxen",joinDiscord:"Discord beitreten",viewPortfolio:"Portfolio ansehen",adminLink:"Admin",statProjects:"Projekte",statFrom:"Ab Preis",statThemes:"Website Themes",statRating:"Bewertung",secWebsites:"Websites",secWebsitesTitle:"Individuelle<br>Website Themes",secLogos:"Logos",secLogosTitle:"Markenidentität<br>& Logos",secBanners:"Banner",secBannersTitle:"Banner",secProducts:"Produkte",secProductsTitle:"Produkt<br>Artwork",secThumbs:"Thumbnails",secThumbsTitle:"YouTube<br>Thumbnails",ctaTitle:"Bereit für dein<br>nächstes <span style='color:var(--muted)'>Projekt?</span>",ctaSub:"Tritt dem Discord bei und bestell direkt dein Custom GFX.",bannerFromPrice:"ab €10",productFromPrice:"ab €3",subServerBanners:"Server Banner",subProfileBanners:"Profil Banner",subEmbedBanners:"Embed Banner",subSignatures:"Signaturen",subProductBoxes:"Produkt Boxen",subProductCards:"Produkt Karten"}};
 let lang='en';
 function applyLang(l){lang=l;const t=T[l];document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(t[k]!==undefined)el.innerHTML=t[k];});document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));document.documentElement.lang=l;}
 document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 
-function loadDynamicGFX(){
-  const items=JSON.parse(localStorage.getItem('docgfx_items')||'[]');
-  if(!items.length){document.getElementById('dynamicSection').innerHTML='';return;}
-  const cats={};items.forEach(item=>{if(!cats[item.category])cats[item.category]=[];cats[item.category].push(item);});
-  const sec=document.getElementById('dynamicSection');sec.innerHTML='<div class="divider"></div>';
-  let idx=6;
-  Object.entries(cats).forEach(([cat,list])=>{
-    const el=document.createElement('div');el.className='dynamic-section reveal';
-    el.innerHTML=`<div class="section-header"><div><span class="dynamic-tag">0${idx}++ — New Additions</span><h2>${cat}</h2></div></div><div class="dynamic-grid">${list.map((item,i)=>`<div class="dyn-item"><img src="${item.url}" loading="lazy" alt="${item.title}">${i===0?'<div class="dyn-new">NEW</div>':''}<div class="dyn-meta"><div class="dyn-title">${escapeHtml(item.title)}</div><div class="dyn-cat">${item.category}</div></div></div>`).join('')}</div>`;
-    sec.appendChild(el);idx++;
+// ---- Sub-tab logic (generic, works for any group) ----
+function initTabGroup(tabsContainerId) {
+  const container = document.getElementById(tabsContainerId);
+  if (!container) return;
+  container.addEventListener('click', function(e) {
+    const btn = e.target.closest('.sub-tab');
+    if (!btn) return;
+    const panelKey = btn.dataset.panel;
+    // Deactivate all tabs in this container
+    container.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    // Find the parent section and toggle panels
+    const section = container.closest('.section');
+    section.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('panel-' + panelKey);
+    if (panel) panel.classList.add('active');
   });
-  document.querySelectorAll('#dynamicSection .reveal').forEach(el=>obs.observe(el));
-  const total=50+items.length;document.getElementById('statTotal').textContent=total+'+';
 }
-function escapeHtml(str){return str.replace(/[&<>]/g,function(m){if(m==='&')return '&amp;';if(m==='<')return '&lt;';if(m==='>')return '&gt;';return m;});}
+initTabGroup('bannerTabs');
+initTabGroup('productTabs');
 
-// Login Logic
-const loginOverlay=document.getElementById('loginOverlay');
-function showLogin(){loginOverlay.classList.add('open');}
-function hideLogin(){loginOverlay.classList.remove('open');}
-document.getElementById('loginSubmit').addEventListener('click',()=>{
-  const u=document.getElementById('loginUser').value.trim();
-  const p=document.getElementById('loginPass').value;
-  if(u===ADMIN_USER && p===ADMIN_PASS){isLoggedIn=true;hideLogin();openAdminPanel();document.getElementById('loginUser').value='';document.getElementById('loginPass').value='';document.getElementById('loginError').style.display='none';}
-  else{document.getElementById('loginError').style.display='block';}
-});
-document.getElementById('loginUser').addEventListener('keypress',e=>{if(e.key==='Enter')document.getElementById('loginSubmit').click();});
-document.getElementById('loginPass').addEventListener('keypress',e=>{if(e.key==='Enter')document.getElementById('loginSubmit').click();});
+// ---- Dynamic GFX ----
+const categoryGridMap = {
+  'Logos': 'grid-logos',
+  'Server Banners': 'grid-server-banners',
+  'Profile Banners': 'grid-profile-banners',
+  'Embed Banners': 'grid-embed-banners',
+  'Signatures': 'grid-signatures',
+  'Product Boxes': 'grid-boxes',
+  'Product Cards': 'grid-cards',
+  'Websites': 'grid-websites',
+  'Thumbnails': 'grid-thumbnails',
+  // legacy support
+  'Banners': 'grid-server-banners',
+  'Product Boxes (legacy)': 'grid-boxes'
+};
 
+function loadDynamicGFX(){
+  const items = JSON.parse(localStorage.getItem('docgfx_items') || '[]');
+  document.querySelectorAll('.dyn-item').forEach(el => el.remove());
+  if (!items.length) { updateStatTotal(0); return; }
+  const cats = {};
+  items.forEach(item => { if (!cats[item.category]) cats[item.category] = []; cats[item.category].push(item); });
+  Object.entries(cats).forEach(([cat, list]) => {
+    const gridId = categoryGridMap[cat];
+    if (!gridId) return;
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    // Remove empty placeholder if present
+    const placeholder = grid.querySelector('.empty-placeholder');
+    if (placeholder) placeholder.remove();
+    list.forEach((item, index) => {
+      const isNewest = index === 0;
+      const dynItem = document.createElement('div');
+      dynItem.className = 'dyn-item';
+      dynItem.setAttribute('data-item-id', item.id || item.date);
+      let deleteHTML = '';
+      if (isLoggedIn) deleteHTML = `<div class="dyn-delete" data-id="${item.id || item.date}"><i class="fa-solid fa-trash-can"></i></div>`;
+      dynItem.innerHTML = `
+        <img src="${item.url}" loading="lazy" alt="${escapeHtml(item.title)}">
+        ${isNewest ? '<div class="dyn-new">NEW</div>' : ''}
+        <div class="dyn-meta">
+          <div class="dyn-title">${escapeHtml(item.title)}</div>
+          <div class="dyn-cat">${item.category}</div>
+        </div>
+        ${deleteHTML}
+      `;
+      if (isLoggedIn) {
+        const deleteBtn = dynItem.querySelector('.dyn-delete');
+        if (deleteBtn) deleteBtn.addEventListener('click', e => { e.stopPropagation(); deleteItemById(deleteBtn.getAttribute('data-id')); });
+      }
+      grid.insertBefore(dynItem, grid.firstChild);
+    });
+  });
+  updateStatTotal(items.length);
+}
+
+function updateStatTotal(dynamicCount){ document.getElementById('statTotal').textContent = (50 + dynamicCount) + '+'; }
+
+function deleteItemById(id){
+  let items = JSON.parse(localStorage.getItem('docgfx_items') || '[]');
+  const newItems = items.filter(item => (item.id || item.date).toString() !== id.toString());
+  if (newItems.length === items.length) return;
+  localStorage.setItem('docgfx_items', JSON.stringify(newItems));
+  loadDynamicGFX();
+  showAdminStatus('✓ Item deleted', 'ok');
+}
+
+function escapeHtml(str){ return str.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]||m)); }
+
+// ---- Auth ----
+const loginOverlay = document.getElementById('loginOverlay');
+function showLogin(){ loginOverlay.classList.add('open'); }
+function hideLogin(){ loginOverlay.classList.remove('open'); }
+function startDiscordLogin(){
+  const oauthUrl='https://discord.com/api/oauth2/authorize?client_id='+DISCORD_CLIENT_ID+'&redirect_uri='+encodeURIComponent(REDIRECT_URI)+'&response_type=token&scope=identify';
+  window.location.href=oauthUrl;
+}
+function handleAuthCallback(){
+  const hash=window.location.hash.substring(1);
+  if(!hash)return;
+  const params=new URLSearchParams(hash);
+  const accessToken=params.get('access_token');
+  const error=params.get('error');
+  if(error){document.getElementById('loginError').textContent='Login cancelled or failed.';document.getElementById('loginError').style.display='block';window.location.hash='';return;}
+  if(!accessToken)return;
+  window.location.hash='';
+  fetch('https://discord.com/api/users/@me',{headers:{'Authorization':'Bearer '+accessToken}})
+    .then(r=>{if(!r.ok)throw new Error('API error');return r.json();})
+    .then(user=>{
+      if(user.id===ALLOWED_USER_ID){isLoggedIn=true;hideLogin();openAdminPanel();loadDynamicGFX();document.getElementById('loginError').style.display='none';}
+      else{document.getElementById('loginError').textContent='Access denied. Only the owner can login.';document.getElementById('loginError').style.display='block';}
+    })
+    .catch(()=>{document.getElementById('loginError').textContent='Failed to verify identity. Try again.';document.getElementById('loginError').style.display='block';});
+}
+function performLogout(){isLoggedIn=false;closeAdminPanel();hideLogin();loadDynamicGFX();}
+document.getElementById('discordLoginBtn').addEventListener('click',startDiscordLogin);
+document.getElementById('loginError').style.display='none';
+
+// ---- Admin panel ----
 const adminOverlay=document.getElementById('adminOverlay');
 function openAdminPanel(){if(isLoggedIn)adminOverlay.classList.add('open');else showLogin();}
 function closeAdminPanel(){adminOverlay.classList.remove('open');}
@@ -335,23 +569,26 @@ document.getElementById('adminBtn').addEventListener('click',openAdminPanel);
 document.getElementById('adminBtnFooter').addEventListener('click',openAdminPanel);
 document.getElementById('adminClose').addEventListener('click',closeAdminPanel);
 document.getElementById('adminCancelBtn').addEventListener('click',closeAdminPanel);
+document.getElementById('adminLogoutBtn').addEventListener('click',performLogout);
 adminOverlay.addEventListener('click',e=>{if(e.target===adminOverlay)closeAdminPanel();});
 
-// Webhook & Add Logic
 const DEFAULT_WEBHOOK_AVATAR="https://cdn.discordapp.com/attachments/1496247584531153017/1496247633021243553/IMG_7228.png?ex=69edcdf2&is=69ec7c72&hm=5b5006cafa2e239997353a11970ba3cf2912902c8912a03b8349e8bb8f07e68e&";
 const whInput=document.getElementById('webhookUrl');
 const savedWh=localStorage.getItem('docgfx_wh');
-if(savedWh) whInput.value=savedWh;
+if(savedWh)whInput.value=savedWh;
+const embedColorInput=document.getElementById('embedColor');
+const colorHexDisplay=document.getElementById('colorHexDisplay');
+const savedColor=localStorage.getItem('docgfx_embedColor');
+if(savedColor){embedColorInput.value=savedColor;colorHexDisplay.textContent=savedColor.toUpperCase();}
+embedColorInput.addEventListener('input',()=>{colorHexDisplay.textContent=embedColorInput.value.toUpperCase();localStorage.setItem('docgfx_embedColor',embedColorInput.value);});
 document.getElementById('saveWebhook').addEventListener('click',()=>{localStorage.setItem('docgfx_wh',whInput.value.trim());showAdminStatus('Webhook saved','ok');});
 
 async function sendToDiscord(title,category,imageUrl,note){
   const webhook=whInput.value.trim();
   if(!webhook)return false;
-  const embed={title:`🎨 New GFX: ${title}`,description:note||"Fresh addition to DocGFX portfolio!",color:0xffffff,fields:[{name:"Category",value:category,inline:true},{name:"Added",value:new Date().toLocaleString(),inline:true}],image:{url:imageUrl},footer:{text:"DocGFX · Premium Graphics"},timestamp:new Date().toISOString()};
-  try{
-    const res=await fetch(webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:"DocGFX",avatar_url:DEFAULT_WEBHOOK_AVATAR,embeds:[embed]})});
-    return res.ok||res.status===204;
-  }catch{return false;}
+  const embedColor=parseInt(embedColorInput.value.replace('#',''),16);
+  const embed={title:`🎨 New GFX: ${title}`,description:note||"Fresh addition to DocGFX portfolio!",color:embedColor,fields:[{name:"Category",value:category,inline:true},{name:"Added",value:new Date().toLocaleString(),inline:true}],image:{url:imageUrl},footer:{text:"DocGFX · Jonas"},timestamp:new Date().toISOString()};
+  try{const res=await fetch(webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:"DocGFX",avatar_url:DEFAULT_WEBHOOK_AVATAR,embeds:[embed]})});return res.ok||res.status===204;}catch{return false;}
 }
 
 document.getElementById('adminAddBtn').addEventListener('click',async()=>{
@@ -362,12 +599,12 @@ document.getElementById('adminAddBtn').addEventListener('click',async()=>{
   if(!url){showAdminStatus('Image URL required','err');return;}
   if(!title){showAdminStatus('Title required','err');return;}
   const items=JSON.parse(localStorage.getItem('docgfx_items')||'[]');
-  items.unshift({url,title,category,date:Date.now()});
+  const newId=Date.now();
+  items.unshift({id:newId,url,title,category,date:newId});
   localStorage.setItem('docgfx_items',JSON.stringify(items.slice(0,30)));
   loadDynamicGFX();
   const sent=await sendToDiscord(title,category,url,`**${title}** added to ${category}`);
-  if(sent)showAdminStatus('✓ Added & Discord notified!','ok');
-  else showAdminStatus('✓ Added (webhook not set or failed)','ok');
+  showAdminStatus(sent?'✓ Added & Discord notified!':'✓ Added (webhook not set)','ok');
   document.getElementById('adminImgUrl').value='';
   document.getElementById('adminTitle').value='';
   setTimeout(closeAdminPanel,1500);
@@ -378,8 +615,12 @@ function showAdminStatus(msg,type){
   s.textContent=msg;s.className='nstatus '+type;
   setTimeout(()=>{s.className='nstatus';},3500);
 }
+
+// ---- Scroll reveal ----
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.07});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+handleAuthCallback();
 loadDynamicGFX();
 applyLang('en');
 </script>
