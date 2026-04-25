@@ -39,8 +39,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:2rem;overflow:hidden;padding-top:80px}
 .hero-img{position:absolute;inset:0;background:url("https://cdn.discordapp.com/attachments/1496200606908416030/1496234538353954836/CBB229E5-DC48-4DE6-9FCA-110EB8B41C45.png") center/cover no-repeat;opacity:0.06;-webkit-mask-image:linear-gradient(to bottom,black 0%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,transparent 100%)}
 .hero-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(255,255,255,0.04) 0%,transparent 70%);pointer-events:none}
-.hero-content{position:relative;z-index:1;max-width:680px}
-.logo-img{width:68px;height:68px;object-fit:contain;border-radius:16px;border:1px solid var(--border-h);background:var(--surface);padding:10px;margin-bottom:1.75rem}
+.hero-content{position:relative;z-index:1;max-width:680px;display:flex;flex-direction:column;align-items:center}
+.logo-img{width:110px;height:110px;object-fit:contain;border-radius:20px;border:1px solid var(--border-h);background:var(--surface);padding:14px;margin-bottom:1.5rem;display:block}
 .badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid var(--border-h);color:var(--muted2);font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-bottom:1.25rem}
 h1{font-family:'Syne',sans-serif;font-size:clamp(50px,10vw,88px);font-weight:800;line-height:0.93;letter-spacing:-0.03em;margin-bottom:1.1rem;color:#fff}
 h1 em{font-style:normal;color:var(--muted)}
@@ -154,6 +154,7 @@ footer a:hover{color:#fff}
   .cta{padding:44px 20px;margin:0 1.25rem 60px}
   .section,.dynamic-section{padding-left:1.25rem;padding-right:1.25rem}
   nav{padding:14px 16px}
+  .logo-img{width:80px;height:80px;padding:10px}
 }
 </style>
 </head>
@@ -177,7 +178,7 @@ footer a:hover{color:#fff}
   <div class="hero-img"></div>
   <div class="hero-glow"></div>
   <div class="hero-content">
-    <img class="logo-img" src="https://media.discordapp.net/attachments/1496247584531153017/1496247604705624174/image.png?ex=69edcdeb&is=69ec7c6b&hm=bf7895e8253d6043ec71ec7e2f7e0cf05230aea573b8c483b00faf2620ce027d&=&format=webp&quality=lossless&width=2784&height=982" alt="DocGFX" loading="eager">
+    <img class="logo-img" src="https://cdn.discordapp.com/attachments/1496247584531153017/1496247633021243553/IMG_7228.png?ex=69edcdf2&is=69ec7c72&hm=5b5006cafa2e239997353a11970ba3cf2912902c8912a03b8349e8bb8f07e68e&" alt="DocGFX Logo" loading="eager">
     <div class="badge"><i class="fa-solid fa-bolt" style="font-size:8px"></i> <span data-t="badge">Premium Graphics Studio</span></div>
     <h1>Doc<em>GFX</em></h1>
     <p class="hero-sub" data-t="heroSub">Websites · Logos · Banners · Thumbnails · Product Boxes</p>
@@ -270,7 +271,7 @@ footer a:hover{color:#fff}
   </div>
 </div>
 
-<!-- ADMIN PANEL (only accessible after login) -->
+<!-- ADMIN PANEL -->
 <div class="admin-overlay" id="adminOverlay">
   <div class="admin-panel">
     <button class="admin-close" id="adminClose"><i class="fa-solid fa-xmark"></i></button>
