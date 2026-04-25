@@ -10,108 +10,129 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#080808;--surface:#111;--border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);--text:#fff;--muted:#666;--accent:#c8f500;--accent-dim:rgba(200,245,0,0.08);--radius:16px}
+:root{
+  --bg:#060606;
+  --surface:#0f0f0f;
+  --surface2:#161616;
+  --border:rgba(255,255,255,0.06);
+  --border-h:rgba(255,255,255,0.12);
+  --text:#fff;
+  --muted:#555;
+  --muted2:#888;
+  --accent:#fff;
+  --accent-dim:rgba(255,255,255,0.06);
+  --radius:14px;
+}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:rgba(8,8,8,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.02em;color:#fff;text-decoration:none}
-.nav-logo span{color:var(--accent)}
-.nav-right{display:flex;align-items:center;gap:14px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(6,6,6,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.02em;color:#fff;text-decoration:none}
+.nav-logo span{color:var(--muted2)}
+.nav-right{display:flex;align-items:center;gap:12px}
 .lang-toggle{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:3px;gap:2px}
-.lang-btn{padding:5px 12px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:0.06em;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s}
-.lang-btn.active{background:var(--accent);color:#000}
-.admin-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:11px;padding:6px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em}
-.admin-btn:hover{border-color:var(--border-h);color:#fff}
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:2rem;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,245,0,0.07) 0%,transparent 60%);pointer-events:none}
-.hero-img{position:absolute;inset:0;background:url("https://cdn.discordapp.com/attachments/1496200606908416030/1496234538353954836/CBB229E5-DC48-4DE6-9FCA-110EB8B41C45.png") center/cover no-repeat;opacity:0.1;-webkit-mask-image:linear-gradient(to bottom,black 0%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,transparent 100%)}
-.hero-content{position:relative;z-index:1;max-width:700px}
-.logo-img{width:70px;height:70px;object-fit:contain;border-radius:16px;border:1px solid var(--border-h);background:var(--surface);padding:10px;margin-bottom:2rem}
-.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid rgba(200,245,0,0.2);color:var(--accent);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:1.5rem}
-h1{font-family:'Syne',sans-serif;font-size:clamp(52px,10vw,90px);font-weight:800;line-height:0.95;letter-spacing:-0.03em;margin-bottom:1.25rem}
-h1 span{color:var(--accent)}
-.hero-sub{font-size:16px;color:var(--muted);margin-bottom:2.5rem;font-weight:300}
-.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:14px 28px;border-radius:100px;text-decoration:none;transition:background 0.2s,transform 0.2s;border:none;cursor:pointer}
-.btn-primary:hover{background:#d9ff1a;transform:translateY(-2px)}
-.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;font-family:'Syne',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.03em;padding:14px 28px;border-radius:100px;text-decoration:none;transition:background 0.2s,border-color 0.2s;border:1px solid var(--border-h)}
-.btn-ghost:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.04)}
-.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:11px;letter-spacing:0.1em;text-transform:uppercase}
-.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,transparent,var(--muted));animation:sline 2s ease-in-out infinite}
+.lang-btn{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:0.06em;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.18s}
+.lang-btn.active{background:#fff;color:#000}
+.admin-link{display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--border);color:var(--muted);font-size:11px;padding:5px 13px;border-radius:100px;cursor:pointer;transition:all 0.18s;letter-spacing:0.05em;text-decoration:none}
+.admin-link:hover{border-color:var(--border-h);color:#fff}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:2rem;overflow:hidden;padding-top:80px}
+.hero-img{position:absolute;inset:0;background:url("https://cdn.discordapp.com/attachments/1496200606908416030/1496234538353954836/CBB229E5-DC48-4DE6-9FCA-110EB8B41C45.png") center/cover no-repeat;opacity:0.06;-webkit-mask-image:linear-gradient(to bottom,black 0%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,transparent 100%)}
+.hero-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(255,255,255,0.04) 0%,transparent 70%);pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:680px}
+.logo-img{width:68px;height:68px;object-fit:contain;border-radius:16px;border:1px solid var(--border-h);background:var(--surface);padding:10px;margin-bottom:1.75rem}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid var(--border-h);color:var(--muted2);font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-bottom:1.25rem}
+h1{font-family:'Syne',sans-serif;font-size:clamp(50px,10vw,88px);font-weight:800;line-height:0.93;letter-spacing:-0.03em;margin-bottom:1.1rem;color:#fff}
+h1 em{font-style:normal;color:var(--muted)}
+.hero-sub{font-size:15px;color:var(--muted);margin-bottom:2.25rem;font-weight:300;letter-spacing:0.01em}
+.hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.04em;padding:13px 26px;border-radius:100px;text-decoration:none;transition:background 0.18s,transform 0.18s;border:none;cursor:pointer}
+.btn-primary:hover{background:#e8e8e8;transform:translateY(-2px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--muted2);font-family:'Syne',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.04em;padding:13px 26px;border-radius:100px;text-decoration:none;transition:all 0.18s;border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--border-h);color:#fff}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:10px;letter-spacing:0.12em;text-transform:uppercase}
+.scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,transparent,var(--muted));animation:sline 2.2s ease-in-out infinite}
 @keyframes sline{0%,100%{opacity:0}50%{opacity:1}}
-.stats-bar{display:flex;justify-content:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 2rem;flex-wrap:wrap}
-.stat{flex:1;min-width:110px;text-align:center;padding:0 1.5rem;border-right:1px solid var(--border)}
+
+/* STATS */
+.stats-bar{display:flex;justify-content:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 2rem;flex-wrap:wrap}
+.stat{flex:1;min-width:100px;text-align:center;padding:0 1.5rem;border-right:1px solid var(--border)}
 .stat:last-child{border-right:none}
-.stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);display:block;line-height:1;margin-bottom:3px}
-.stat-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.stat-num{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#fff;display:block;line-height:1;margin-bottom:3px}
+.stat-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+
+/* SECTIONS */
 .section{padding:80px 2rem;max-width:1100px;margin:0 auto}
-.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px}
-.section-tag{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:block}
-.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:800;letter-spacing:-0.02em;line-height:1.1}
-.price-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--muted);border:1px solid var(--border);padding:6px 14px;border-radius:100px;white-space:nowrap;text-decoration:none;transition:border-color 0.2s,color 0.2s}
-.price-tag:hover{border-color:var(--accent);color:var(--accent)}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:14px}
+.section-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(22px,3.5vw,32px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;color:#fff}
+.price-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);border:1px solid var(--border);padding:6px 13px;border-radius:100px;white-space:nowrap;text-decoration:none;transition:all 0.18s}
+.price-tag:hover{border-color:var(--border-h);color:#fff}
 .divider{height:1px;background:var(--border)}
-.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-.video-card{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);transition:border-color 0.25s,transform 0.25s}
+
+/* VIDEOS */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.video-card{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);transition:border-color 0.22s,transform 0.22s}
 .video-card:hover{border-color:var(--border-h);transform:translateY(-3px)}
 .video-card iframe{width:100%;height:100%;border:none;display:block}
-.v-label{position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);border:1px solid var(--border);color:#fff;font-size:11px;font-weight:600;letter-spacing:0.04em;padding:4px 10px;border-radius:100px;pointer-events:none}
-.v-price{position:absolute;top:10px;right:10px;background:var(--accent);color:#000;font-size:11px;font-weight:700;font-family:'Syne',sans-serif;padding:4px 10px;border-radius:100px;pointer-events:none}
-.img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.img-item{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);aspect-ratio:1/1;transition:border-color 0.25s,transform 0.25s;contain:layout paint}
-.img-item.wide{aspect-ratio:16/9;grid-column:span 2}
-.img-item img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(70%);transition:filter 0.35s,transform 0.35s;will-change:filter}
-.img-item:hover{border-color:var(--border-h);transform:translateY(-4px)}
-.img-item:hover img{filter:grayscale(0%);transform:scale(1.03)}
-.img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,transparent 50%);opacity:0;transition:opacity 0.25s;display:flex;align-items:flex-end;padding:14px}
-.img-item:hover .img-overlay{opacity:1}
-.overlay-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:7px;flex-shrink:0}
-.overlay-label{font-size:12px;font-weight:500;color:rgba(255,255,255,0.85)}
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
-.product-item{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);aspect-ratio:1/1;transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;contain:layout paint}
-.product-item img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(50%);transition:filter 0.35s,transform 0.35s;will-change:filter}
-.product-item:hover{border-color:rgba(200,245,0,0.25);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.4)}
-.product-item:hover img{filter:grayscale(0%);transform:scale(1.03)}
-.cta{margin:40px auto 80px;max-width:1100px;padding:72px 40px;text-align:center;border-radius:24px;border:1px solid rgba(200,245,0,0.15);background:linear-gradient(135deg,#0f0f0f 0%,#111a00 100%);position:relative;overflow:hidden}
-.cta::before{content:'';position:absolute;top:-60%;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(200,245,0,0.07) 0%,transparent 70%);pointer-events:none}
-.cta-title{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:800;letter-spacing:-0.02em;margin-bottom:14px;position:relative}
-.cta-sub{color:var(--muted);margin-bottom:32px;position:relative}
-footer{border-top:1px solid var(--border);padding:28px 2rem;text-align:center;color:var(--muted);font-size:12px;letter-spacing:0.05em}
-footer span{color:var(--accent)}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+.v-label{position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);border:1px solid var(--border);color:#fff;font-size:10px;font-weight:600;letter-spacing:0.05em;padding:4px 10px;border-radius:100px;pointer-events:none}
+.v-price{position:absolute;top:10px;right:10px;background:#fff;color:#000;font-size:10px;font-weight:700;font-family:'Syne',sans-serif;padding:4px 10px;border-radius:100px;pointer-events:none}
 
-/* Admin Panel */
-.admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
-.admin-overlay.open{display:flex}
-.admin-panel{background:#111;border:1px solid var(--border-h);border-radius:20px;padding:32px;width:90%;max-width:520px;position:relative;max-height:90vh;overflow-y:auto}
-.admin-panel h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px}
-.admin-desc{color:var(--muted);font-size:13px;margin-bottom:24px}
-.admin-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;transition:color 0.2s}
-.admin-close:hover{color:#fff}
-.form-group{margin-bottom:16px}
-.form-group label{display:block;font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:#0d0d0d;border:1px solid var(--border-h);border-radius:10px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:border-color 0.2s;resize:none}
-.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted)}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
-.form-group select option{background:#111}
-.wh-row{display:flex;gap:10px;align-items:flex-end}
-.wh-row input{flex:1}
-.btn-sm{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;padding:11px 18px;border-radius:10px;border:none;cursor:pointer;transition:background 0.2s;white-space:nowrap}
-.btn-sm:hover{background:#d9ff1a}
-.btn-sm.sec{background:var(--surface);color:#fff;border:1px solid var(--border-h)}
-.btn-sm.sec:hover{background:#1a1a1a}
-.nstatus{font-size:12px;margin-top:12px;padding:9px 13px;border-radius:9px;display:none}
-.nstatus.ok{background:rgba(200,245,0,0.08);color:var(--accent);border:1px solid rgba(200,245,0,0.2);display:block}
-.nstatus.err{background:rgba(255,80,80,0.08);color:#ff6b6b;border:1px solid rgba(255,80,80,0.2);display:block}
+/* IMAGES */
+.img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.img-item{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);aspect-ratio:1/1;transition:border-color 0.22s,transform 0.22s;contain:layout paint}
+.img-item.wide{aspect-ratio:16/9;grid-column:span 2}
+.img-item img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(80%) brightness(0.85);transition:filter 0.3s,transform 0.3s;will-change:filter}
+.img-item:hover{border-color:var(--border-h);transform:translateY(-3px)}
+.img-item:hover img{filter:grayscale(20%) brightness(1);transform:scale(1.03)}
+.img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 55%);opacity:0;transition:opacity 0.22s;display:flex;align-items:flex-end;padding:12px}
+.img-item:hover .img-overlay{opacity:1}
+.overlay-label{font-size:11px;font-weight:500;color:rgba(255,255,255,0.8);display:flex;align-items:center;gap:6px}
+.overlay-label::before{content:'';width:5px;height:5px;border-radius:50%;background:#fff;flex-shrink:0}
+
+/* PRODUCTS */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.product-item{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);aspect-ratio:1/1;transition:border-color 0.22s,transform 0.22s,box-shadow 0.22s;contain:layout paint}
+.product-item img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(60%);transition:filter 0.3s,transform 0.3s;will-change:filter}
+.product-item:hover{border-color:rgba(255,255,255,0.18);transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,0.5)}
+.product-item:hover img{filter:grayscale(0%);transform:scale(1.03)}
+
+/* Dynamic GFX items (admin-added) */
+.dynamic-section{padding:0 2rem 80px;max-width:1100px;margin:0 auto}
+.dynamic-section h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3.5vw,32px);font-weight:800;letter-spacing:-0.02em;color:#fff;margin-bottom:8px}
+.dynamic-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
+.dynamic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:24px}
+.dyn-item{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface);aspect-ratio:1/1;transition:border-color 0.22s,transform 0.22s;contain:layout paint}
+.dyn-item img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(60%);transition:filter 0.3s,transform 0.3s}
+.dyn-item:hover{border-color:var(--border-h);transform:translateY(-3px)}
+.dyn-item:hover img{filter:grayscale(0%);transform:scale(1.03)}
+.dyn-meta{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);opacity:0;transition:opacity 0.22s;display:flex;flex-direction:column;justify-content:flex-end;padding:12px}
+.dyn-item:hover .dyn-meta{opacity:1}
+.dyn-title{font-size:12px;font-weight:600;color:#fff}
+.dyn-cat{font-size:10px;color:var(--muted2);letter-spacing:0.06em;text-transform:uppercase}
+.dyn-new{position:absolute;top:8px;right:8px;background:#fff;color:#000;font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:0.06em}
+
+/* CTA */
+.cta{margin:0 2rem 80px;max-width:1100px;margin-left:auto;margin-right:auto;padding:64px 40px;text-align:center;border-radius:20px;border:1px solid var(--border);background:var(--surface);position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:400px;height:250px;background:radial-gradient(ellipse,rgba(255,255,255,0.04) 0%,transparent 70%);pointer-events:none}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4.5vw,44px);font-weight:800;letter-spacing:-0.02em;margin-bottom:12px;position:relative}
+.cta-sub{color:var(--muted);margin-bottom:28px;position:relative;font-size:14px}
+footer{border-top:1px solid var(--border);padding:24px 2rem;text-align:center;color:var(--muted);font-size:11px;letter-spacing:0.06em;display:flex;align-items:center;justify-content:center;gap:16px}
+footer a{color:var(--muted);text-decoration:none;transition:color 0.18s}
+footer a:hover{color:#fff}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
 @media(max-width:640px){
   .img-item.wide{grid-column:span 1;aspect-ratio:1/1}
-  .stat{min-width:90px;padding:0 1rem}
-  .cta{padding:48px 20px;margin:20px 1.25rem 60px}
-  .section{padding:60px 1.25rem}
-  nav{padding:14px 18px}
-  .admin-panel{padding:24px}
+  .stat{min-width:80px;padding:0 .75rem}
+  .cta{padding:44px 20px;margin:0 1.25rem 60px}
+  .section,.dynamic-section{padding-left:1.25rem;padding-right:1.25rem}
+  nav{padding:14px 16px}
 }
 </style>
 </head>
@@ -124,30 +145,33 @@ footer span{color:var(--accent)}
       <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="de">DE</button>
     </div>
-    <button class="admin-btn" id="adminBtn">
-      <i class="fa-solid fa-upload" style="font-size:10px;margin-right:4px"></i><span data-t="admin">Admin</span>
-    </button>
+    <a href="/admin/" class="admin-link">
+      <i class="fa-solid fa-lock" style="font-size:9px"></i>
+      <span data-t="adminLink">Admin</span>
+    </a>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-img"></div>
-  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
   <div class="hero-content">
     <img class="logo-img" src="https://cdn.discordapp.com/attachments/1496247584531153017/1496247633021243553/IMG_7228.png" alt="DocGFX" loading="eager">
-    <div class="badge"><i class="fa-solid fa-bolt" style="font-size:9px"></i> <span data-t="badge">Premium Graphics Studio</span></div>
-    <h1>Doc<span>GFX</span></h1>
+    <div class="badge"><i class="fa-solid fa-bolt" style="font-size:8px"></i> <span data-t="badge">Premium Graphics Studio</span></div>
+    <h1>Doc<em>GFX</em></h1>
     <p class="hero-sub" data-t="heroSub">Websites · Logos · Banners · Thumbnails · Product Boxes</p>
     <div class="hero-actions">
       <a href="https://discord.gg/SNHbWq7hPt" class="btn-primary"><i class="fa-brands fa-discord"></i> <span data-t="joinDiscord">Join Discord</span></a>
-      <a href="#portfolio" class="btn-ghost"><span data-t="viewPortfolio">View Portfolio</span> <i class="fa-solid fa-arrow-down" style="font-size:10px"></i></a>
+      <a href="#portfolio" class="btn-ghost"><span data-t="viewPortfolio">View Portfolio</span> <i class="fa-solid fa-arrow-down" style="font-size:9px"></i></a>
     </div>
   </div>
   <div class="scroll-hint"><div class="scroll-line"></div>scroll</div>
 </section>
 
+<!-- STATS -->
 <div class="stats-bar">
-  <div class="stat"><span class="stat-num">50+</span><span class="stat-label" data-t="statProjects">Projects</span></div>
+  <div class="stat"><span class="stat-num" id="statTotal">50+</span><span class="stat-label" data-t="statProjects">Projects</span></div>
   <div class="stat"><span class="stat-num">€20</span><span class="stat-label" data-t="statFrom">Starting From</span></div>
   <div class="stat"><span class="stat-num">3</span><span class="stat-label" data-t="statThemes">Website Themes</span></div>
   <div class="stat"><span class="stat-num">5★</span><span class="stat-label" data-t="statRating">Rating</span></div>
@@ -155,7 +179,10 @@ footer span{color:var(--accent)}
 
 <div id="portfolio"></div>
 
-<!-- Websites -->
+<!-- DYNAMIC GFX (admin-added) rendered here -->
+<div id="dynamicSection"></div>
+
+<!-- WEBSITES -->
 <section class="section reveal">
   <div class="section-header">
     <div>
@@ -181,82 +208,52 @@ footer span{color:var(--accent)}
 
 <div class="divider"></div>
 
-<!-- Logos -->
+<!-- LOGOS -->
 <section class="section reveal">
   <div class="section-header">
     <div>
       <span class="section-tag">02 — <span data-t="secLogos">Logos</span></span>
       <h2 class="section-title" data-t="secLogosTitle">Brand Identity<br>& Logos</h2>
     </div>
-    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag">
-      <i class="fa-brands fa-discord" style="font-size:11px"></i> <span data-t="inquire">Request Price</span>
-    </a>
+    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> <span data-t="inquire">Request Price</span></a>
   </div>
   <div class="img-grid">
-    <div class="img-item">
-      <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210394495090778/ws_logo.png" loading="lazy" alt="WS Logo">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">WS Logo</span></div>
-    </div>
-    <div class="img-item">
-      <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210395279294634/Logo.png" loading="lazy" alt="Logo">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">Custom Logo</span></div>
-    </div>
-    <div class="img-item">
-      <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403211131878899845/X-Logo.png" loading="lazy" alt="X Logo">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">X Logo</span></div>
-    </div>
-    <div class="img-item">
-      <img src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464035639627899/Sellauth-Logo-EngineX.png" loading="lazy" alt="EngineX Logo">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">EngineX Logo</span></div>
-    </div>
+    <div class="img-item"><img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210394495090778/ws_logo.png" loading="lazy" alt="WS Logo"><div class="img-overlay"><span class="overlay-label">WS Logo</span></div></div>
+    <div class="img-item"><img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403210395279294634/Logo.png" loading="lazy" alt="Logo"><div class="img-overlay"><span class="overlay-label">Custom Logo</span></div></div>
+    <div class="img-item"><img src="https://cdn.discordapp.com/attachments/1403170169437683842/1403211131878899845/X-Logo.png" loading="lazy" alt="X Logo"><div class="img-overlay"><span class="overlay-label">X Logo</span></div></div>
+    <div class="img-item"><img src="https://cdn.discordapp.com/attachments/1403170169437683842/1439464035639627899/Sellauth-Logo-EngineX.png" loading="lazy" alt="EngineX"><div class="img-overlay"><span class="overlay-label">EngineX Logo</span></div></div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- Banners -->
+<!-- BANNERS -->
 <section class="section reveal">
   <div class="section-header">
     <div>
       <span class="section-tag">03 — <span data-t="secBanners">Banners</span></span>
       <h2 class="section-title" data-t="secBannersTitle">Discord & Server<br>Banners</h2>
     </div>
-    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag">
-      <i class="fa-brands fa-discord" style="font-size:11px"></i> <span data-t="inquire">Request Price</span>
-    </a>
+    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> <span data-t="inquire">Request Price</span></a>
   </div>
   <div class="img-grid">
-    <div class="img-item wide">
-      <img src="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif" loading="lazy" alt="DarkChair">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">DarkChair</span></div>
-    </div>
-    <div class="img-item wide">
-      <img src="https://media.discordapp.net/attachments/1427005539094630462/1479919850577985646/Banner-2.png" loading="lazy" alt="Banner 2">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">Banner 2</span></div>
-    </div>
-    <div class="img-item wide">
-      <img src="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif" loading="lazy" alt="EngineX">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">EngineX</span></div>
-    </div>
-    <div class="img-item wide">
-      <img src="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif" loading="lazy" alt="Server Banner">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">Server Banner</span></div>
-    </div>
+    <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1427005539094630462/1450843216990703676/DarkChair.gif" loading="lazy" alt="DarkChair"><div class="img-overlay"><span class="overlay-label">DarkChair</span></div></div>
+    <div class="img-item wide"><img src="https://media.discordapp.net/attachments/1427005539094630462/1479919850577985646/Banner-2.png" loading="lazy" alt="Banner 2"><div class="img-overlay"><span class="overlay-label">Banner 2</span></div></div>
+    <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1427005539094630462/1440970943332618351/EngineX.gif" loading="lazy" alt="EngineX"><div class="img-overlay"><span class="overlay-label">EngineX</span></div></div>
+    <div class="img-item wide"><img src="https://media.discordapp.net/attachments/1427005539094630462/1427006621032124537/Server_Banner_2.gif" loading="lazy" alt="Server Banner"><div class="img-overlay"><span class="overlay-label">Server Banner</span></div></div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- Product Boxes -->
+<!-- PRODUCT BOXES -->
 <section class="section reveal">
   <div class="section-header">
     <div>
       <span class="section-tag">04 — <span data-t="secBoxes">Product Boxes</span></span>
       <h2 class="section-title" data-t="secBoxesTitle">Product<br>Artwork</h2>
     </div>
-    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag">
-      <i class="fa-brands fa-discord" style="font-size:11px"></i> <span data-t="inquire">Request Price</span>
-    </a>
+    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> <span data-t="inquire">Request Price</span></a>
   </div>
   <div class="product-grid">
     <div class="product-item"><img src="https://media.discordapp.net/attachments/1403210515307565116/1458399313435688980/Omega_Int.gif" loading="lazy" alt="Omega"></div>
@@ -268,175 +265,96 @@ footer span{color:var(--accent)}
 
 <div class="divider"></div>
 
-<!-- Thumbnails -->
+<!-- THUMBNAILS -->
 <section class="section reveal">
   <div class="section-header">
     <div>
       <span class="section-tag">05 — <span data-t="secThumbs">Thumbnails</span></span>
       <h2 class="section-title" data-t="secThumbsTitle">YouTube<br>Thumbnails</h2>
     </div>
-    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag">
-      <i class="fa-brands fa-discord" style="font-size:11px"></i> <span data-t="inquire">Request Price</span>
-    </a>
+    <a href="https://discord.gg/SNHbWq7hPt" class="price-tag"><i class="fa-brands fa-discord" style="font-size:10px"></i> <span data-t="inquire">Request Price</span></a>
   </div>
   <div class="img-grid">
-    <div class="img-item wide">
-      <img src="https://cdn.discordapp.com/attachments/1424028192527749201/1424546285595262996/image.png" loading="lazy" alt="Thumbnail">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">Thumbnail</span></div>
-    </div>
-    <div class="img-item wide">
-      <img src="https://cdn.discordapp.com/attachments/1424028192527749201/1480634711998201978/thumbn.png" loading="lazy" alt="Thumbnail">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">Thumbnail</span></div>
-    </div>
-    <div class="img-item wide">
-      <img src="https://cdn.discordapp.com/attachments/1424028192527749201/1487535591418495077/thumbn.png" loading="lazy" alt="Thumbnail">
-      <div class="img-overlay"><div class="overlay-dot"></div><span class="overlay-label">Thumbnail</span></div>
-    </div>
+    <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1424028192527749201/1424546285595262996/image.png" loading="lazy" alt="Thumbnail"><div class="img-overlay"><span class="overlay-label">Thumbnail</span></div></div>
+    <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1424028192527749201/1480634711998201978/thumbn.png" loading="lazy" alt="Thumbnail"><div class="img-overlay"><span class="overlay-label">Thumbnail</span></div></div>
+    <div class="img-item wide"><img src="https://cdn.discordapp.com/attachments/1424028192527749201/1487535591418495077/thumbn.png" loading="lazy" alt="Thumbnail"><div class="img-overlay"><span class="overlay-label">Thumbnail</span></div></div>
   </div>
 </section>
 
 <!-- CTA -->
-<div class="cta reveal" style="margin-left:2rem;margin-right:2rem">
-  <h2 class="cta-title" data-t="ctaTitle">Ready for your<br>next <span style="color:var(--accent)">Project?</span></h2>
+<div class="cta reveal" style="margin-top:0">
+  <h2 class="cta-title" data-t="ctaTitle">Ready for your next<br><span style="color:var(--muted)">Project?</span></h2>
   <p class="cta-sub" data-t="ctaSub">Join the Discord and order your custom GFX directly.</p>
-  <a href="https://discord.gg/SNHbWq7hPt" class="btn-primary" style="font-size:14px;padding:16px 36px">
+  <a href="https://discord.gg/SNHbWq7hPt" class="btn-primary" style="font-size:13px;padding:14px 32px">
     <i class="fa-brands fa-discord"></i> <span data-t="joinDiscord">Join Discord</span>
   </a>
 </div>
 
-<footer>Made with ❤️ by <span>DocGFX</span> &nbsp;·&nbsp; Premium Graphics Studio</footer>
-
-<!-- Admin Panel -->
-<div class="admin-overlay" id="adminOverlay">
-  <div class="admin-panel">
-    <button class="admin-close" id="adminClose"><i class="fa-solid fa-xmark"></i></button>
-    <h3 data-t="adminTitle">Upload New GFX</h3>
-    <p class="admin-desc" data-t="adminDesc">Add a new piece and notify your Discord server via webhook.</p>
-
-    <div class="form-group">
-      <label data-t="labelWebhook">Discord Webhook URL</label>
-      <div class="wh-row">
-        <input type="text" id="webhookUrl" placeholder="https://discord.com/api/webhooks/...">
-        <button class="btn-sm sec" id="saveWebhook"><i class="fa-solid fa-floppy-disk"></i> <span data-t="save">Save</span></button>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label data-t="labelCategory">Category</label>
-      <select id="gfxCategory">
-        <option>Logo</option>
-        <option>Banner</option>
-        <option>Thumbnail</option>
-        <option>Product Box</option>
-        <option>Website</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label data-t="labelTitle">Title</label>
-      <input type="text" id="gfxTitle" placeholder="e.g. Omega Product Box">
-    </div>
-
-    <div class="form-group">
-      <label data-t="labelUrl">Image / GIF URL</label>
-      <input type="text" id="gfxUrl" placeholder="https://cdn.discordapp.com/...">
-    </div>
-
-    <div class="form-group">
-      <label data-t="labelNote">Note (optional)</label>
-      <textarea id="gfxNote" rows="2" placeholder="Short description..."></textarea>
-    </div>
-
-    <div style="display:flex;gap:10px;margin-top:4px">
-      <button class="btn-sm" id="sendNotify"><i class="fa-brands fa-discord"></i> <span data-t="sendNotify">Send to Discord</span></button>
-      <button class="btn-sm sec" id="adminClose2"><span data-t="cancel">Cancel</span></button>
-    </div>
-    <div class="nstatus" id="nstatus"></div>
-  </div>
-</div>
+<footer>
+  <span>© 2025 DocGFX</span>
+  <span style="color:var(--border-h)">·</span>
+  <a href="https://discord.gg/SNHbWq7hPt"><i class="fa-brands fa-discord"></i> Discord</a>
+  <span style="color:var(--border-h)">·</span>
+  <a href="/admin/"><i class="fa-solid fa-lock" style="font-size:10px"></i> Admin</a>
+</footer>
 
 <script>
+// TRANSLATIONS
 const T={
-  en:{badge:"Premium Graphics Studio",heroSub:"Websites · Logos · Banners · Thumbnails · Product Boxes",joinDiscord:"Join Discord",viewPortfolio:"View Portfolio",statProjects:"Projects",statFrom:"Starting From",statThemes:"Website Themes",statRating:"Rating",secWebsites:"Websites",secWebsitesTitle:"Custom Website<br>Themes",secLogos:"Logos",secLogosTitle:"Brand Identity<br>& Logos",secBanners:"Banners",secBannersTitle:"Discord & Server<br>Banners",secBoxes:"Product Boxes",secBoxesTitle:"Product<br>Artwork",secThumbs:"Thumbnails",secThumbsTitle:"YouTube<br>Thumbnails",inquire:"Request Price",ctaTitle:"Ready for your<br>next <span style='color:var(--accent)'>Project?</span>",ctaSub:"Join the Discord and order your custom GFX directly.",admin:"Admin",adminTitle:"Upload New GFX",adminDesc:"Add a new piece and notify your Discord server via webhook.",labelWebhook:"Discord Webhook URL",save:"Save",labelCategory:"Category",labelTitle:"Title",labelUrl:"Image / GIF URL",labelNote:"Note (optional)",sendNotify:"Send to Discord",cancel:"Cancel",notifyOk:"✓ Sent to Discord!",notifyErr:"✗ Failed — check webhook URL.",notifySaved:"✓ Webhook saved."},
-  de:{badge:"Premium Graphics Studio",heroSub:"Websites · Logos · Banner · Thumbnails · Produkt-Boxen",joinDiscord:"Discord beitreten",viewPortfolio:"Portfolio ansehen",statProjects:"Projekte",statFrom:"Ab Preis",statThemes:"Website Themes",statRating:"Bewertung",secWebsites:"Websites",secWebsitesTitle:"Individuelle<br>Website Themes",secLogos:"Logos",secLogosTitle:"Markenidentität<br>& Logos",secBanners:"Banner",secBannersTitle:"Discord & Server<br>Banner",secBoxes:"Produkt-Boxen",secBoxesTitle:"Produkt<br>Artwork",secThumbs:"Thumbnails",secThumbsTitle:"YouTube<br>Thumbnails",inquire:"Preis anfragen",ctaTitle:"Bereit für dein<br>nächstes <span style='color:var(--accent)'>Projekt?</span>",ctaSub:"Tritt dem Discord bei und bestell direkt dein Custom GFX.",admin:"Admin",adminTitle:"Neues GFX hochladen",adminDesc:"Füge ein Werk hinzu und benachrichtige deinen Discord via Webhook.",labelWebhook:"Discord Webhook URL",save:"Speichern",labelCategory:"Kategorie",labelTitle:"Titel",labelUrl:"Bild / GIF URL",labelNote:"Notiz (optional)",sendNotify:"An Discord senden",cancel:"Abbrechen",notifyOk:"✓ An Discord gesendet!",notifyErr:"✗ Fehler — Webhook URL prüfen.",notifySaved:"✓ Webhook gespeichert."}
+  en:{badge:"Premium Graphics Studio",heroSub:"Websites · Logos · Banners · Thumbnails · Product Boxes",joinDiscord:"Join Discord",viewPortfolio:"View Portfolio",adminLink:"Admin",statProjects:"Projects",statFrom:"Starting From",statThemes:"Website Themes",statRating:"Rating",secWebsites:"Websites",secWebsitesTitle:"Custom Website<br>Themes",secLogos:"Logos",secLogosTitle:"Brand Identity<br>& Logos",secBanners:"Banners",secBannersTitle:"Discord & Server<br>Banners",secBoxes:"Product Boxes",secBoxesTitle:"Product<br>Artwork",secThumbs:"Thumbnails",secThumbsTitle:"YouTube<br>Thumbnails",inquire:"Request Price",ctaTitle:"Ready for your next<br><span style='color:var(--muted)'>Project?</span>",ctaSub:"Join the Discord and order your custom GFX directly."},
+  de:{badge:"Premium Graphics Studio",heroSub:"Websites · Logos · Banner · Thumbnails · Produkt-Boxen",joinDiscord:"Discord beitreten",viewPortfolio:"Portfolio ansehen",adminLink:"Admin",statProjects:"Projekte",statFrom:"Ab Preis",statThemes:"Website Themes",statRating:"Bewertung",secWebsites:"Websites",secWebsitesTitle:"Individuelle<br>Website Themes",secLogos:"Logos",secLogosTitle:"Markenidentität<br>& Logos",secBanners:"Banner",secBannersTitle:"Discord & Server<br>Banner",secBoxes:"Produkt-Boxen",secBoxesTitle:"Produkt<br>Artwork",secThumbs:"Thumbnails",secThumbsTitle:"YouTube<br>Thumbnails",inquire:"Preis anfragen",ctaTitle:"Bereit für dein<br>nächstes <span style='color:var(--muted)'>Projekt?</span>",ctaSub:"Tritt dem Discord bei und bestell direkt dein Custom GFX."}
 };
-
 let lang='en';
-function applyLang(l){
-  lang=l;
-  const t=T[l];
-  document.querySelectorAll('[data-t]').forEach(el=>{
-    const k=el.getAttribute('data-t');
-    if(t[k]!==undefined) el.innerHTML=t[k];
-  });
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
-  document.documentElement.lang=l;
-}
+function applyLang(l){lang=l;const t=T[l];document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(t[k]!==undefined)el.innerHTML=t[k];});document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));document.documentElement.lang=l;}
 document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 
-// Admin
-const overlay=document.getElementById('adminOverlay');
-const open=()=>overlay.classList.add('open');
-const close=()=>overlay.classList.remove('open');
-document.getElementById('adminBtn').addEventListener('click',open);
-document.getElementById('adminClose').addEventListener('click',close);
-document.getElementById('adminClose2').addEventListener('click',close);
-overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
-
-const whInput=document.getElementById('webhookUrl');
-const saved=localStorage.getItem('docgfx_wh');
-if(saved) whInput.value=saved;
-
-document.getElementById('saveWebhook').addEventListener('click',()=>{
-  localStorage.setItem('docgfx_wh',whInput.value.trim());
-  showStatus(T[lang].notifySaved,'ok');
-});
-
-document.getElementById('sendNotify').addEventListener('click',async()=>{
-  const wh=whInput.value.trim();
-  const cat=document.getElementById('gfxCategory').value;
-  const title=document.getElementById('gfxTitle').value.trim();
-  const url=document.getElementById('gfxUrl').value.trim();
-  const note=document.getElementById('gfxNote').value.trim();
-  if(!wh){showStatus('✗ Enter a webhook URL first.','err');return;}
-  if(!title){showStatus('✗ Please enter a title.','err');return;}
-  const dateStr=new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
-  const body={
-    username:"DocGFX",
-    avatar_url:"https://cdn.discordapp.com/attachments/1496247584531153017/1496247633021243553/IMG_7228.png",
-    embeds:[{
-      title:`🎨 New GFX Added — ${title}`,
-      description:note||"A new piece has been added to the DocGFX portfolio!",
-      color:0xc8f500,
-      fields:[{name:"Category",value:cat,inline:true},{name:"Date",value:dateStr,inline:true}],
-      ...(url?{image:{url}}:{}),
-      footer:{text:"DocGFX · Premium Graphics Studio"},
-      timestamp:new Date().toISOString()
-    }]
-  };
-  try{
-    const r=await fetch(wh,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(r.ok||r.status===204){
-      showStatus(T[lang].notifyOk,'ok');
-      document.getElementById('gfxTitle').value='';
-      document.getElementById('gfxUrl').value='';
-      document.getElementById('gfxNote').value='';
-    } else throw new Error();
-  }catch{showStatus(T[lang].notifyErr,'err');}
-});
-
-function showStatus(msg,type){
-  const s=document.getElementById('nstatus');
-  s.textContent=msg;
-  s.className='nstatus '+type;
-  setTimeout(()=>{s.className='nstatus';},4000);
+// LOAD DYNAMIC GFX (stored by admin panel)
+function loadDynamicGFX(){
+  const items=JSON.parse(localStorage.getItem('docgfx_items')||'[]');
+  if(!items.length) return;
+  // group by category
+  const cats={};
+  items.forEach(item=>{if(!cats[item.category])cats[item.category]=[];cats[item.category].push(item);});
+  const sec=document.getElementById('dynamicSection');
+  sec.innerHTML='<div class="divider"></div>';
+  let idx=6;
+  Object.entries(cats).forEach(([cat,list])=>{
+    const el=document.createElement('div');
+    el.className='dynamic-section reveal';
+    el.innerHTML=`
+      <div class="section-header">
+        <div>
+          <span class="dynamic-tag">0${idx}++ — New Additions</span>
+          <h2>${cat}</h2>
+        </div>
+      </div>
+      <div class="dynamic-grid">
+        ${list.map((item,i)=>`
+          <div class="dyn-item">
+            <img src="${item.url}" loading="lazy" alt="${item.title}">
+            ${i===0?'<div class="dyn-new">NEW</div>':''}
+            <div class="dyn-meta">
+              <div class="dyn-title">${item.title}</div>
+              <div class="dyn-cat">${item.category}</div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    sec.appendChild(el);
+    idx++;
+  });
+  sec.appendChild(document.createElement('div')).className='divider';
+  // re-observe new elements
+  document.querySelectorAll('.dynamic-section.reveal').forEach(el=>obs.observe(el));
+  // update stat
+  const total=50+items.length;
+  document.getElementById('statTotal').textContent=total+'+';
 }
 
-// Scroll reveal
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
-},{threshold:0.08});
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.07});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+loadDynamicGFX();
 </script>
 </body>
 </html>
