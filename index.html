@@ -416,6 +416,7 @@ footer a:hover{color:#fff}
     <button class="admin-close" id="adminClose"><i class="fa-solid fa-xmark"></i></button>
     <h3>Admin — Manage GFX</h3>
     <p class="admin-desc">Add new artwork or delete existing ones (only visible when logged in)</p>
+    <div class="form-group"><label>GitHub Token <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(nur lokal gespeichert)</span></label><div class="wh-row"><input type="password" id="ghToken" placeholder="github_pat_..."><button class="btn-sm sec" id="saveGhToken"><i class="fa-solid fa-floppy-disk"></i> Save</button></div></div>
     <div class="form-group"><label>Discord Webhook URL</label><div class="wh-row"><input type="text" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..."><button class="btn-sm sec" id="saveWebhook"><i class="fa-solid fa-floppy-disk"></i> Save</button></div></div>
     <div class="form-group"><label>Embed Color</label><div class="color-picker-wrapper"><input type="color" id="embedColor" value="#ffffff"><span class="color-hex" id="colorHexDisplay">#FFFFFF</span></div></div>
     <div class="form-group"><label>Image URL</label><input type="text" id="adminImgUrl" placeholder="https://cdn.discordapp.com/..."></div>
@@ -495,8 +496,7 @@ const gridPlaceholderMap = {
   'grid-cards': 'placeholder-cards'
 };
 
-function loadDynamicGFX(){
-  const items = JSON.parse(localStorage.getItem('docgfx_items') || '[]');
+function renderItems(items){
   document.querySelectorAll('.dyn-item').forEach(el => el.remove());
   Object.values(gridPlaceholderMap).forEach(pid => {
     const p = document.getElementById(pid);
@@ -538,17 +538,26 @@ function loadDynamicGFX(){
   updateStatTotal(items.length);
 }
 
-function updateStatTotal(dynamicCount){ document.getElementById('statTotal').textContent = (50 + dynamicCount) + '+'; }
-
-function deleteItemById(id){
-  let items = JSON.parse(localStorage.getItem('docgfx_items') || '[]');
-  const newItems = items.filter(item => (item.id || item.date).toString() !== id.toString());
-  if (newItems.length === items.length) return;
-  localStorage.setItem('docgfx_items', JSON.stringify(newItems));
-  loadDynamicGFX();
-  showAdminStatus('✓ Item deleted', 'ok');
+async function loadDynamicGFX(){
+  const items = await fetchRemoteItems();
+  renderItems(items);
 }
 
+function updateStatTotal(dynamicCount){ document.getElementById('statTotal').textContent = (50 + dynamicCount) + '+'; }
+
+async function deleteItemById(id){
+  if (!getGhToken()) { showAdminStatus('GitHub Token fehlt!', 'err'); return; }
+  showAdminStatus('Deleting…', 'ok');
+  try {
+    const {items, sha} = await ghGetFile();
+    const newItems = items.filter(item => (item.id || item.date).toString() !== id.toString());
+    await ghPutFile(newItems, sha);
+    renderItems(newItems);
+    showAdminStatus('✓ Gelöscht', 'ok');
+  } catch(e) {
+    showAdminStatus('Fehler: ' + e.message, 'err');
+  }
+}
 function escapeHtml(str){ return str.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]||m)); }
 
 const loginOverlay = document.getElementById('loginOverlay');
@@ -589,6 +598,12 @@ document.getElementById('adminCancelBtn').addEventListener('click',closeAdminPan
 document.getElementById('adminLogoutBtn').addEventListener('click',performLogout);
 adminOverlay.addEventListener('click',e=>{if(e.target===adminOverlay)closeAdminPanel();});
 
+const GH_OWNER = 'docgfx';
+const GH_REPO = 'docgfx.github.io';
+const GH_BRANCH = 'main';
+const GH_FILE = 'data.json';
+const GH_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+
 const DEFAULT_WEBHOOK_AVATAR="https://cdn.discordapp.com/attachments/1496247584531153017/1496247633021243553/IMG_7228.png?ex=69edcdf2&is=69ec7c72&hm=5b5006cafa2e239997353a11970ba3cf2912902c8912a03b8349e8bb8f07e68e&";
 const whInput=document.getElementById('webhookUrl');
 const savedWh=localStorage.getItem('docgfx_wh');
@@ -599,6 +614,41 @@ const savedColor=localStorage.getItem('docgfx_embedColor');
 if(savedColor){embedColorInput.value=savedColor;colorHexDisplay.textContent=savedColor.toUpperCase();}
 embedColorInput.addEventListener('input',()=>{colorHexDisplay.textContent=embedColorInput.value.toUpperCase();localStorage.setItem('docgfx_embedColor',embedColorInput.value);});
 document.getElementById('saveWebhook').addEventListener('click',()=>{localStorage.setItem('docgfx_wh',whInput.value.trim());showAdminStatus('Webhook saved','ok');});
+
+const ghTokenInput=document.getElementById('ghToken');
+const savedGhToken=localStorage.getItem('docgfx_gh_token');
+if(savedGhToken)ghTokenInput.value=savedGhToken;
+document.getElementById('saveGhToken').addEventListener('click',()=>{localStorage.setItem('docgfx_gh_token',ghTokenInput.value.trim());showAdminStatus('Token saved','ok');});
+
+function getGhToken(){return ghTokenInput.value.trim()||localStorage.getItem('docgfx_gh_token')||'';}
+
+async function ghGetFile(){
+  const res=await fetch(GH_API+'?ref='+GH_BRANCH,{headers:{Authorization:'token '+getGhToken(),'Accept':'application/vnd.github+json'}});
+  if(res.status===404)return{items:[],sha:null};
+  if(!res.ok)throw new Error('GitHub fetch failed: '+res.status);
+  const data=await res.json();
+  const content=JSON.parse(atob(data.content.replace(/\n/g,'')));
+  return{items:content.items||[],sha:data.sha};
+}
+
+async function ghPutFile(items,sha){
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify({items},null,2))));
+  const body={message:'Update portfolio data',content,branch:GH_BRANCH};
+  if(sha)body.sha=sha;
+  const res=await fetch(GH_API,{method:'PUT',headers:{Authorization:'token '+getGhToken(),'Accept':'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!res.ok)throw new Error('GitHub push failed: '+res.status);
+  return res.json();
+}
+
+async function fetchRemoteItems(){
+  try{
+    const url=`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${GH_FILE}?t=${Date.now()}`;
+    const res=await fetch(url);
+    if(!res.ok)return[];
+    const data=await res.json();
+    return data.items||[];
+  }catch{return[];}
+}
 
 async function sendToDiscord(title,category,imageUrl,note){
   const webhook=whInput.value.trim();
@@ -615,16 +665,22 @@ document.getElementById('adminAddBtn').addEventListener('click',async()=>{
   const category=document.getElementById('adminCategory').value;
   if(!url){showAdminStatus('Image URL required','err');return;}
   if(!title){showAdminStatus('Title required','err');return;}
-  const items=JSON.parse(localStorage.getItem('docgfx_items')||'[]');
-  const newId=Date.now();
-  items.unshift({id:newId,url,title,category,date:newId});
-  localStorage.setItem('docgfx_items',JSON.stringify(items.slice(0,30)));
-  loadDynamicGFX();
-  const sent=await sendToDiscord(title,category,url,`**${title}** added to ${category}`);
-  showAdminStatus(sent?'✓ Added & Discord notified!':'✓ Added (webhook not set)','ok');
-  document.getElementById('adminImgUrl').value='';
-  document.getElementById('adminTitle').value='';
-  setTimeout(closeAdminPanel,1500);
+  if(!getGhToken()){showAdminStatus('GitHub Token fehlt!','err');return;}
+  showAdminStatus('Saving to GitHub…','ok');
+  try{
+    const{items,sha}=await ghGetFile();
+    const newId=Date.now();
+    items.unshift({id:newId,url,title,category,date:newId});
+    await ghPutFile(items.slice(0,100),sha);
+    loadDynamicGFX();
+    const sent=await sendToDiscord(title,category,url,`**${title}** added to ${category}`);
+    showAdminStatus(sent?'✓ Gespeichert & Discord benachrichtigt!':'✓ Gespeichert auf GitHub!','ok');
+    document.getElementById('adminImgUrl').value='';
+    document.getElementById('adminTitle').value='';
+    setTimeout(closeAdminPanel,1800);
+  }catch(e){
+    showAdminStatus('Fehler: '+e.message,'err');
+  }
 });
 
 function showAdminStatus(msg,type){
